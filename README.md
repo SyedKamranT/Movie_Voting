@@ -70,3 +70,6 @@ Advantages
 User Engagement: Interactive voting keeps users engaged.
 Scalability: Can handle a large number of users with the chosen tech stack.
 Real-Time Features: Provides a seamless experience with live updates.
+Lightweight and quick to set up.
+Easy integration with MongoDB using pymongo.
+Rich ecosystem for real-time communication (Flask-SocketIO) and security (Flask-JWT).
