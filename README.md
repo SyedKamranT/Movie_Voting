@@ -27,33 +27,49 @@ Responsive Design
 
 Fully functional across desktops, tablets, and smartphones.
 Technology Stack
-Frontend:
 
+
+Frontend:
 React: For building the interactive user interface.
 Axios: For API requests.
 Socket.IO Client: For real-time communication.
-Backend:
 
-Node.js & Express: For handling API requests and business logic.
-Socket.IO: For real-time communication between the server and clients.
+
+Backend:
+Python: Backend logic.
+Flask: Lightweight framework to handle API requests and manage business logic.
+Flask-SocketIO: For real-time updates (replacing Node.js Socket.IO).
+
+Database:
 MongoDB: For storing user data, movies, and votes.
+
+
 Tools & Hosting:
 
 Postman: For testing API endpoints.
 Vercel/Netlify: Hosting the frontend.
 Render/Heroku: Hosting the backend.
 MongoDB Atlas: Cloud-hosted database.
+
+
 Potential Use Cases
+
 Entertainment Platforms:
-
 Voting for upcoming movie releases or favorites in award shows.
+
+
 Cinemas & Film Festivals:
-
 Allowing audiences to vote for movies in real-time.
-Social Engagement:
 
+
+Social Engagement:
 Community-driven platforms for users to vote and discuss their favorite films.
+
+
 Advantages
 User Engagement: Interactive voting keeps users engaged.
 Scalability: Can handle a large number of users with the chosen tech stack.
 Real-Time Features: Provides a seamless experience with live updates.
+Lightweight and quick to set up.
+Easy integration with MongoDB using pymongo.
+Rich ecosystem for real-time communication (Flask-SocketIO) and security (Flask-JWT).
