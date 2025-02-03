@@ -10,8 +10,7 @@ function App() {
   return (
     <div>
       <Login />
-      <Results />
-      <Voting/>
+      
     </div>
   )
 }
