@@ -18,8 +18,6 @@ def create_app():
     # Import and register routes
     from .routes import main_routes
     app.register_blueprint(main_routes)
-    
-    
     socketio.init_app(app)
     jwt.init_app(app)  
     
