@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Login from "./components/Login";
 import Results from "./components/Results";
 import Voting from "./components/Voting";
+import Movies from "./components/Movies";
 import "./App.css";
 
 function App() {
@@ -19,7 +20,10 @@ function App() {
     <div>
       {isAuthenticated ? (
         <>
+        
+        <Movies />
           <Voting />
+          
           <Results />
           <button
             onClick={() => {
