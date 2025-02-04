@@ -4,8 +4,39 @@ import google from '../images/search.png'
 import facebook from '../images/facebook.png'
 import apple from '../images/apple.png'
 import '../../src/App.css'
+import axios from 'axios'
+import { useState } from 'react'
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://127.0.0.1:8889/login", {
+        username,
+        password,
+      });
+
+      // Save token in localStorage
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("username", username);
+
+      setMessage("Login successful!");
+      setError("");
+
+      // Update authentication state
+      setIsAuthenticated(true);
+    } catch (err) {
+      setError("Invalid username or password");
+      setMessage("");
+    }
+  };
+
   return (
     <div className=" min-h-screen w-full flex items-center justify-center ">
   <div className="relative flex flex-col sm:flex-row items-center justify-center min-h-screen w-full">
@@ -21,11 +52,12 @@ const Login = () => {
         <h3 className="text-xl font-semibold text-black font-[Poppins]">Let's Get You Started</h3>
         <h1 className="text-3xl font-bold text-black font-[Poppins]">Create An Account</h1>
       </div>
-
-      <form className="w-full flex flex-col gap-5">
-        <input className="p-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" type="text" placeholder="Your Name Here.." />
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {message && <p style={{ color: "green" }}>{message}</p>}
+      <form onSubmit={handleLogin} className="w-full flex flex-col gap-5">
+        <input  value={username} onChange={(e) => setUsername(e.target.value)} required className="p-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" type="text" placeholder="Username" />
         <input className="p-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" type="email" placeholder="Enter Email" />
-        <input className="p-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" type="password" placeholder="Enter Password" />
+        <input value={password} onChange={(e) => setPassword(e.target.value)} required className="p-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" type="password" placeholder="Enter Password" />
         <input className="bg-blue-500 text-white p-3 rounded-lg cursor-pointer hover:bg-blue-600 transition font-semibold" type="submit" value="Get Started" />
       </form>
 
