@@ -4,9 +4,15 @@
 *{
     font-family: "Zen Kaku Gothic Antique", serif;
 } */
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('/fonts/PPMonumentExtended-Black.otf') format('opentype'),
+       url('/fonts/PPMonumentExtended-Light.otf') format('opentype'),
+       url('/fonts/PPMonumentExtended-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-body {
-  font-family: 'Poppins', sans-serif;
+.font-custom {
+  font-family: 'MyCustomFont', sans-serif;
 }

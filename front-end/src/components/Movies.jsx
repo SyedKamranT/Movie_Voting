@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from "./Navbar";
 
 const Movies = () => {
     const [movies, setMovies] = useState([]);
@@ -30,7 +31,7 @@ const Movies = () => {
 
     return (
         <div>
-            <h2>Welcome, {username}!</h2>
+            {/* <h2>Welcome, {username}!</h2>
             <h3>Movies List</h3>
             {error && <p style={{ color: "red" }}>{error}</p>}
             <ul>
@@ -38,6 +39,7 @@ const Movies = () => {
                     <li key={index}>{movie.title} - Rating: {movie.rating}</li>
                 ))}
             </ul>
+ */}
 
 
 
@@ -49,6 +51,13 @@ const Movies = () => {
             }}>
                 Logout
             </button> */}
+
+
+
+
+
+    {/* Starting my code from here... */}
+
 
         </div>
     );
