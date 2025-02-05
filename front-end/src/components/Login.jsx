@@ -27,6 +27,7 @@ const Login = ({ setIsAuthenticated }) => {
       localStorage.setItem("username", username);
 
       setMessage("Login successful!");
+      window.location.href = "http://localhost:5173/"
       setError("");
 
       // Update authentication state
@@ -38,7 +39,7 @@ const Login = ({ setIsAuthenticated }) => {
   };
 
   return (
-    <div className=" min-h-screen w-full flex items-center justify-center ">
+    <div className="min-h-screen w-full flex items-center justify-center">
   <div className="relative flex flex-col sm:flex-row items-center justify-center min-h-screen w-full">
     
     {/* Image Background */}
@@ -46,27 +47,27 @@ const Login = ({ setIsAuthenticated }) => {
       <img className="w-full h-full object-cover mix-blend-soft-light" src={image} alt="Background" />
     </div>
     
-<div className="text-base font-regular text-black font-[Poppins]">
-  
-  </div>
+    {/* Responsive RAMOV text */}
+    <div className="absolute top-[50px] md:top-[30px] sm:top-[70px] tracking-[3px] sm:tracking-[5px] font-custom font-extrabold text-[25px] sm:text-[35px] text-[#153F29] text-center w-full px-4">
+      RAMOV
+    </div>
 
     {/* Sign-In Form */}
-    <div className="relative z-10 bg-[#000000]/70 backdrop-blur-lg p-6 sm:p-8 rounded-xl shadow-2xl max-w-[450px] w-full sm:w-auto lg:w-[500px]">
+    <div className="relative z-10 bg-[#000000]/70 backdrop-blur-lg p-6 sm:p-8 rounded-xl shadow-2xl max-w-[90%] sm:max-w-[450px] lg:max-w-[500px] w-full">
       <div className="text-left mb-6">
-        <h3 className="text-xs font-regular text-white ">LET'S GET YOU STARTED</h3>
-        <h1 className="text-2xl font-bold text-white">Log in to Get Started</h1>
+        <h3 className="text-xs font-regular text-white">LET'S GET YOU STARTED</h3>
+        <h1 className="text-xl font-bold text-white ">Log in to Get Started</h1>
       </div>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p style={{ color: "red"}}>{error}</p>}
       {message && <p style={{ color: "green" }}>{message}</p>}
       <form onSubmit={handleLogin} className="w-full flex flex-col gap-4">
-        <input  value={username} onChange={(e) => setUsername(e.target.value)} required className="p-2.5 border ring-1 border-white/80 rounded-lg  text-white focus:outline-none focus:ring-1 focus:ring-white" type="text" placeholder="Username" />
-        {/* <input className="p-2.5 border ring-1  border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black-100" type="email" placeholder="Enter Email" /> */}
+        <input value={username} onChange={(e) => setUsername(e.target.value)} required className="p-2.5 border ring-1 border-white/80 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-white" type="text" placeholder="Username" />
         <input value={password} onChange={(e) => setPassword(e.target.value)} required className="p-2.5 border ring-1 border-white/80 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-white" type="password" placeholder="Enter Password" />
-        <input className="bg-[#0DBC87] text-white p-3 rounded-lg cursor-pointer hover:bg-[#00AB77] transition font-semibold" type="submit" value="GET STARTED" />
+        <input className="bg-[#0DBC87] tracking-[2px] text-white p-3 rounded-lg cursor-pointer hover:bg-[#00AB77] transition font-semibold" type="submit" value="GET STARTED" />
       </form>
 
-      <div className="text-center mt-6 text-white/90 ">
-      ───────────────   Or   ───────────────
+      <div className="text-center mt-6 text-white/90">
+        ─────────────── Or ───────────────
       </div>
 
       {/* Social Sign-In Buttons */}
@@ -79,15 +80,10 @@ const Login = ({ setIsAuthenticated }) => {
           <img src={facebook} alt="Facebook" className="h-5" />
           <span className="text-gray-700 font-medium">Sign in with Facebook</span>
         </button>
-        {/* <button className="bg-[#E0F3FF] flex items-center justify-center gap-3 p-2 w-full rounded-lg shadow-md hover:bg-blue-100 transition">
-          <img src={apple} alt="Apple" className="h-5" />
-          <span className="text-gray-700 font-medium">Sign in with Apple</span>
-        </button> */}
       </div>
     </div>
   </div>
 </div>
-
   
   )
 }
