@@ -22,7 +22,7 @@ const Navbar = (params) => {
   }, []);
   return (
     <div className="m-0 p-0">
-    <nav className="flex items-center bg-[#153F29] justify-between h-20 rounded-xl m-2 p-5 relative">
+    <nav className="flex items-center bg-[#153F29] justify-between h-20 rounded-xl m-3 p-5 relative">
       {/* Left part of the navbar */}
       <div className="flex items-center gap-4 md:gap-4 lg:gap-6">
         <div className="logo font-custom font-extrabold text-[25px] tracking-[5px] text-[#7EE084]">
@@ -72,13 +72,13 @@ const Navbar = (params) => {
             className="text-white font-bold bg-transparent w-full outline-0"
           />
           <button>
-            <CiSearch className="text-2xl text-[#81E687]" />
+            <CiSearch className="text-2xl text-[#81E687] " />
           </button>
         </div>
         <div className="logout">
           {isAuthenticated ? (
             <button
-              className="text-white bg-red-500 rounded-lg lg:p-3 md:px-3 md:py-2"
+              className="text-white bg-red-500 rounded-lg lg:px-4 lg:py-2 lg:p-2 md:py-2 cursor-pointer"
               onClick={() => {
                 localStorage.removeItem("token");
                 setIsAuthenticated(false);
@@ -91,7 +91,7 @@ const Navbar = (params) => {
           window.location.href = "http://localhost:5173/login"
            
 
-            }} className="text-white bg-green-500 rounded-lg lg:px-4 lg:py-2 lg:p-2 md:py-2">LOGIN</button>
+            }} className="text-white bg-green-500 rounded-lg lg:px-4 lg:py-2 lg:p-2 md:py-2 cursor-pointer">LOGIN</button>
           )}
         </div>
       </div>

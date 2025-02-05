@@ -57,7 +57,6 @@ def login():
 
 # Fetch Movies Route (GET)
 @main_routes.route('/movies', methods=['GET'])
-@jwt_required()
 def get_movies():
     # Fetch movies from the movies collection
     movies = list(db.movies.find({}, {"_id": 0}))  # Excluding the "_id" field in the response
