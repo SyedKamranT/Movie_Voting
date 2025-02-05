@@ -69,7 +69,7 @@ def get_movies():
 
 @main_routes.route('/kids', methods=['GET'])
 def get_kid_shows():
-    # Fetch movies from the movies collection
+    # Fetch kid shows from the kids collection
     kids_show = list(db.kids_show.find({}, {"_id": 0}))  # Excluding the "_id" field in the response
     
     if kids_show:
@@ -79,7 +79,7 @@ def get_kid_shows():
     
 @main_routes.route('/series', methods=['GET'])
 def get_webseries():
-    # Fetch movies from the movies collection
+    # Fetch series from the series collection
     web_series = list(db.web_series.find({}, {"_id": 0}))  # Excluding the "_id" field in the response
     
     if web_series:
