@@ -8,6 +8,7 @@ import Series from "./components/Series";
 import Kids from "./components/Kids";
 import Navbar from "./components/Navbar";
 import Coursel from "./components/Coursel"
+import Home from "./components/Home";
 import "./App.css";
 
 function App() {
@@ -29,7 +30,12 @@ function App() {
   const router = createBrowserRouter ([
     {
       path: "/",
-      element:<><Navbar authenticated = {isAuthenticated} set = {setIsAuthenticated} /><Coursel/><Movies/></>
+      element:<>
+      <Navbar authenticated = {isAuthenticated} set = {setIsAuthenticated} /><Coursel/>
+      
+      
+      <Movies/><Series/><Kids/>
+      </>
     },
     {
       path: "/login",
