@@ -3,6 +3,7 @@ from flask_socketio import SocketIO
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 import os
+from flask_cors import CORS
 
 
 socketio = SocketIO(cors_allowed_origins="*")
@@ -10,8 +11,9 @@ jwt = JWTManager()
 
 def create_app():
     app = Flask(__name__)
-    load_dotenv()  
-    
+    load_dotenv() 
+
+    CORS(app)
     
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
     
