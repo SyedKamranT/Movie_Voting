@@ -79,7 +79,7 @@ const Navbar = (params) => {
         <div className="LOGOUT">
           {isAuthenticated ? (
             <button
-              className="text-[#153F29] font-bold text-sm bg-[#81E687] tracking-[2px] rounded-lg md:px-5 md:py-3"
+              className="text-[#153F29] cursor-pointer font-bold text-sm bg-[#81E687] tracking-[2px] rounded-lg md:px-5 md:py-3"
               onClick={() => {
                 localStorage.removeItem("token");
                 setIsAuthenticated(false);
@@ -88,11 +88,11 @@ const Navbar = (params) => {
               LOGOUT
             </button>
           ) : (
-            <button onClick = { ()=>{
+            <button  onClick = { ()=>{
           window.location.href = "http://localhost:5173/login"
            
 
-            }} className="text-[#153F29] font-bold text-sm bg-[#81E687] tracking-[2px] rounded-lg md:px-6 md:py-3">LOGIN</button>
+            }} className="text-[#153F29] font-bold text-sm bg-[#81E687] tracking-[2px] cursor-pointer rounded-lg md:px-6 md:py-3">LOGIN</button>
           )}
         </div>
       </div>

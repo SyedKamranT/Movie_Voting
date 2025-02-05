@@ -5,7 +5,7 @@ import image from "../assets/corosal.png"
 
 const Coursel = () => {
   return (
-    <div className=" m-2 rounded-2xl ">
+    <div className=" m-3 rounded-2xl ">
     <Carousel className="" autoPlay={true}   
     infiniteLoop={true}
     interval={3000}    
