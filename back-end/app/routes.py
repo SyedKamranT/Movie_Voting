@@ -65,3 +65,24 @@ def get_movies():
         return jsonify(movies), 200
     else:
         return jsonify({"message": "No movies found"}), 404
+
+
+@main_routes.route('/kids', methods=['GET'])
+def get_kid_shows():
+    # Fetch movies from the movies collection
+    kids_show = list(db.kids_show.find({}, {"_id": 0}))  # Excluding the "_id" field in the response
+    
+    if kids_show:
+        return jsonify(kids_show), 200
+    else:
+        return jsonify({"message": "No kids show found"}), 404
+    
+@main_routes.route('/series', methods=['GET'])
+def get_webseries():
+    # Fetch movies from the movies collection
+    web_series = list(db.web_series.find({}, {"_id": 0}))  # Excluding the "_id" field in the response
+    
+    if web_series:
+        return jsonify(web_series), 200
+    else:
+        return jsonify({"message": "No web series found"}), 404
