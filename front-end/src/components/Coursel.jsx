@@ -12,15 +12,15 @@ const Coursel = () => {
     showThumbs={false} 
     showStatus={false} >
       <div>
-        <img className="h-[401px] rounded-xl " src={image} alt="Top Movies" />
+        <img className="h-[401px] rounded-xl  object-cover object-top" src={image} alt="Top Movies" />
         <p className="legend">Top Movies</p>
       </div>
       <div>
-        <img className="h-[401px] rounded-xl" src={image} alt="Top Series" />
+        <img className="h-[401px] rounded-xl object-cover object-top" src={image} alt="Top Series" />
         <p className="legend">Top Series</p>
       </div>
       <div>
-        <img className="h-[401px] rounded-xl" src={image} alt="Top Kid Shows" />
+        <img className="h-[401px] rounded-xl object-cover object-top" src={image} alt="Top Kid Shows" />
         <p className="legend">top Kid Shows</p>
       </div>
     </Carousel> 
