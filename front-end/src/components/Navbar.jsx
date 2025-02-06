@@ -7,7 +7,7 @@ import Login from './Login';
 import { CiSearch } from "react-icons/ci";
 import { FiX } from "react-icons/fi";
 
-const Navbar = (params) => {
+const Navbar = ({ searchTerm, setSearchTerm }) => {
 
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -25,6 +25,7 @@ const Navbar = (params) => {
       <nav className="flex items-center bg-[#153F29] justify-between h-20 rounded-xl m-2 p-5 relative">
         {/* Left part of the navbar */}
         <div className="flex items-center gap-4 md:gap-4 lg:gap-6">
+          <div className=''>
           <div className="logo font-custom font-extrabold text-[25px] tracking-[5px] text-[#7EE084]">
             RAMOV
           </div>
@@ -35,6 +36,7 @@ const Navbar = (params) => {
           >
             {menuOpen ? "✖" : "☰"}
           </button>
+          </div>
           {/* Navbar links */}
         <div
           className={`absolute top-20 left-0 w-full bg-[#153F29] md:static md:flex items-center md:gap-4 lg:gap-6 transition-all duration-300 ease-in-out 
@@ -67,9 +69,12 @@ const Navbar = (params) => {
       <div className="hidden md:flex items-center gap-4 md:gap-4 lg:gap-6 w-full md:w-auto lg:w-[400px]">
         <div className="search border-2 border-[#81E687] flex items-center px-4 py-2 rounded-md w-full md:w-[150px] lg:w-[400px]">
           <input
-            type="search"
+            type="text"
             name="movieSearch"
             placeholder="SEARCH"
+           
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
             className="text-white tracking-[1px] text-base font-bold bg-transparent w-full outline-0"
           />
           <button>

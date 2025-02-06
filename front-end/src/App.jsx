@@ -31,10 +31,10 @@ function App() {
     {
       path: "/",
       element:<>
-      <Navbar authenticated = {isAuthenticated} set = {setIsAuthenticated} /><Coursel/>
       
       
-      <Movies/><Series/><Kids/>
+      
+      <Home/>
       </>
     },
     {

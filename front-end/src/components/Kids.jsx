@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import {useEffect} from 'react'
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
-const Kids = () => {
+
+const Kids = ({limit}) => {
   const [Kids, setKids] = useState([]);
   const [error, setError] = useState("");
+  const navigate = useNavigate(); 
 
   useEffect(() => {
       const fetchKids = async () => {
@@ -32,15 +35,22 @@ const Kids = () => {
               <div className="font-custom text-[24px] font-extrabold">
                   TOP RATED KIDS
               </div>
-              <div className="font-custom">VIEW ALL</div>
+              {limit && (
+                    <button
+                        className="font-custom cursor-pointer hover:underline"
+                        onClick={() => navigate("/kids")}
+                    >
+                        VIEW ALL
+                    </button>
+                )}
           </div>
 
           {error && <p style={{ color: "red" }}>{error}</p>}
 
           <ul className="flex items-center justify-start gap-[70px] flex-wrap">
-              {Kids.map((Kids, index) => (
-                  <li key={index} className="self-start">
-                      <button>
+              {Kids.slice(0, limit || Kids.length).map((Kids, i) => (
+                  <li key={i} className="self-start">
+                      <button className=' cursor-pointer'>
                           <img
                               className="     w-[189px] h-[259px] rounded-lg shadow-3xl"
                               src={Kids.poster}
