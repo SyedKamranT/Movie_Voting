@@ -6,7 +6,7 @@ import { IoLogoYoutube } from "react-icons/io";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#153F2933] text-[#153F29] text-center py-4 rounded-t-lg p-4 mx-4 my-4">
+    <footer className="bg-[#153F2933] text-[#153F29] text-center py-4 rounded-lg p-4 mx-4 my-4">
       <div className="flex items-center justify-between">
         <div className="logo font-custom font-extrabold text-[25px] tracking-[5px] text-[#153F29]" align="left" >
           RAMOV
