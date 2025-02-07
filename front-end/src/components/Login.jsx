@@ -48,7 +48,7 @@ const Login = ({ setIsAuthenticated }) => {
     </div>
     
     {/* Responsive RAMOV text */}
-    <div className="absolute top-[50px] md:top-[30px] sm:top-[70px] tracking-[3px] sm:tracking-[5px] font-custom font-extrabold text-[25px] sm:text-[35px] text-[#153F29] text-center w-full px-4">
+    <div className="absolute max-sm:top-[27px] top-[50px] md:top-[30px] sm:top-[70px] tracking-[3px] sm:tracking-[5px] font-custom font-extrabold text-[25px] sm:text-[35px] text-[#153F29] text-center w-full px-4">
       RAMOV
     </div>
 

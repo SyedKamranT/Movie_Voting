@@ -1,39 +1,24 @@
-import React from "react";
-import { useState } from "react";
-//   // Import carousel styles
-// import { Carousel } from "react-responsive-carousel";
+import React, { useState,useEffect } from "react";
 import corosal1 from "../assets/corosal.png";
 import corosal2 from "../assets/corosal.png";
 import corosal3 from "../assets/corosal.png";
 
-    
-    // <div className=" m-3 rounded-2xl ">
-    // <Carousel className="" autoPlay={true}   
-    // infiniteLoop={true}
-    // interval={3000}    
-    // showThumbs={false} 
-    // showStatus={false} >
-    //   <div>
-    //     <img className="h-[401px] rounded-xl  object-cover object-top" src={image} alt="Top Movies" />
-    //     <p className="legend h-[100px] rounded-xl ">Top Movies</p>
-    //   </div>
-    //   <div>
-    //     <img className="h-[401px] rounded-xl object-cover object-top" src={image} alt="Top Series" />
-    //     <p className="legend">Top Series</p>
-    //   </div>
-    //   <div>
-    //     <img className="h-[401px] rounded-xl object-cover object-top" src={image} alt="Top Kid Shows" />
-    //     <p className="legend">top Kid Shows</p>
-    //   </div>
-    // </Carousel> 
-    //   </div>
-  
 const Carousel = () => {
+
+  
   const slides = [
     { id: 1, image: corosal1, alt: "Slide 1" },
     { id: 2, image: corosal2, alt: "Slide 2" },
     { id: 3, image: corosal3, alt: "Slide 3" },
   ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    }, 3000); // Change slide every 3 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -54,14 +39,12 @@ const Carousel = () => {
         {/* Slides */}
         <div
           className="flex max-sm:min-h-[200px] transition-transform duration-700 ease-in-out"
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`,
-          }}
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {slides.map((slide) => (
             <div
               key={slide.id}
-              className="flex-shrink-0 w-full "
+              className="flex-shrink-0 w-full relative"
               style={{ flexBasis: "100%" }}
             >
               <img
@@ -69,6 +52,15 @@ const Carousel = () => {
                 alt={slide.alt}
                 className="w-full h-full object-cover"
               />
+              {/* Overlay Box */}
+              <div className="absolute p-[20px] text-[24px] tracking-[1px] flex flex-row justify-around items-center bottom-[50px] left-[50px] w-[455px] h-[120px] backdrop-blur-2xl bg-white/20 rounded-[12px]">
+                <div className="font-custom leading-[29px] text-white">
+                  TOP RATED <div>MOVIES OF 2025</div>
+                </div>
+                <div className=" ratings h-[58px] w-[69px] bg-[#7EE084] font-bold backdrop-blur-md h-[39px] w-[46px] text-center flex justify-center items-center rounded-[5px]">
+                  <div className="rating text-[24px]">4.5</div>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -79,7 +71,7 @@ const Carousel = () => {
         onClick={handlePrev}
         className="absolute top-1/2 left-5 z-10 transform -translate-y-1/2 backdrop-blur-xl bg-[#153F29]/70 hover:bg-black/50 text-white px-2 py-2 rounded-full"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="32px"viewBox="0 0 24 24" fill="#FFFFFF"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="32px" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
       </button>
 
       {/* Next Button */}
@@ -87,7 +79,7 @@ const Carousel = () => {
         onClick={handleNext}
         className="absolute top-1/2 right-5 z-10 transform -translate-y-1/2 backdrop-blur-xl bg-[#153F29]/70 hover:bg-black/50 text-white px-2 py-2 rounded-full"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="32px"viewBox="0 0 24 24" fill="#FFFFFF"><path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="32px" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path></svg>
       </button>
 
       {/* Indicators */}
@@ -109,4 +101,3 @@ const Carousel = () => {
 };
 
 export default Carousel;
-

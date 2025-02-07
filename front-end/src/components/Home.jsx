@@ -5,6 +5,7 @@ import Coursel from './Coursel'
 import Movies from './Movies'
 import Series from './Series'
 import Kids from './Kids'
+import Footer from './Footer'
 
 const Home = () => {
   const [contentAll, setcontentAll] = useState([]);
@@ -81,6 +82,7 @@ const Home = () => {
           <Movies limit={6} />
           <Series limit={6} />
           <Kids limit={6} />
+          <Footer/>
         </>
       )}
     </div>
