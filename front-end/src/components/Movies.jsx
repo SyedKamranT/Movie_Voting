@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Movies = ({ limit }) => {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState("");
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -27,6 +27,37 @@ const Movies = ({ limit }) => {
         if (votes >= 1000) return (votes / 1000).toFixed(1) + "K";
         return votes;
     };
+    const formatRatings = (ratings) => {
+        
+        if (ratings <= 5.0) {
+            return (
+                <div className="rating">
+                    <div className="relative top-[-50px] left-2 ratings text-white bg-[#FB5E2D] font-bold font-[Mypoppins] backdrop-blur-md h-[39px] w-[46px] text-center flex justify-center items-center rounded-[5px]">
+                        {ratings}
+                    </div>
+                </div>
+            )
+        }
+        else if (ratings <= 7.0) {
+            return (
+                <div className="rating">
+                    <div className="relative top-[-50px] left-2 ratings bg-[#EFE177] font-bold font-[Mypoppins] backdrop-blur-md h-[39px] w-[46px] text-center flex justify-center items-center rounded-[5px]">
+                        {ratings}
+                    </div>
+                </div>
+
+            )
+        }
+        else {
+            return (
+                <div className="rating">
+                    <div className="relative top-[-50px] left-2 ratings bg-[#7EE084] font-bold font-[Mypoppins] backdrop-blur-md h-[39px] w-[46px] text-center flex justify-center items-center rounded-[5px]">
+                        {ratings}
+                    </div>
+                </div>
+            )
+        }
+    }
 
     return (
         <div className="m-3 mt-[50px] font-[Mypoppins]">
@@ -47,17 +78,22 @@ const Movies = ({ limit }) => {
             {error && <p style={{ color: "red" }}>{error}</p>}
 
             <ul className="flex items-center justify-start gap-[70px] flex-wrap">
-                {movies.slice(0, limit || movies.length).map((movie, i) => ( 
+                {movies.slice(0, limit || movies.length).map((movie, i) => (
                     <li key={i} className="self-start">
-                        <button className=" cursor-pointer">
+                        <button className=" cursor-pointer"
+                            onClick={() => {
+                                      navigate(`/voting/${movie._id}`)
+                            }}>
                             <img
                                 className="w-[189px] h-[259px] rounded-lg shadow-3xl"
                                 src={movie.poster}
                                 alt="movie poster"
                             />
-                            <div className="relative top-[-50px] left-2 ratings bg-[#7EE084] font-bold font-[Mypoppins] backdrop-blur-md h-[39px] w-[46px] text-center flex justify-center items-center rounded-[5px]">
-                                {movie.rating}
+
+                            <div className="rating">
+                               <div>{ formatRatings(movie.rating) }</div>
                             </div>
+
                         </button>
                         <div className="flex flex-col gap-2 mt-[-10px]">
                             <div className="font-[Mypoppins] font-[700] text-[#153F29] w-[189px] tracking-[1.5px]">

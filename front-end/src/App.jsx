@@ -55,6 +55,11 @@ function App() {
     {
       path: "/kids",
       element:<> <Navbar authenticated = {isAuthenticated} set = {setIsAuthenticated} /><Kids/></>
+    },
+    {
+      path: "/voting/:id",
+      element:<> <Navbar authenticated = {isAuthenticated} set = {setIsAuthenticated} />
+      <Voting/></>
     }
     
     
