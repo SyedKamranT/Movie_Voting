@@ -107,7 +107,7 @@ const Movies = ({ limit }) => {
                             {movie.genre.split(",").map((word, index) => (
                                 <span
                                     key={index}
-                                    className="border-[#4CAF50] border-2 px-2 py-1 rounded text-sm"
+                                    className="border-[#4CAF50] border-1 px-2 py-1 rounded text-xs"
                                 >
                                     {word.trim()}
                                 </span>
