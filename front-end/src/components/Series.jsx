@@ -28,6 +28,39 @@ const Series = ({ limit }) => {
         return votes;
     };
 
+    const formatRatings = (ratings) => {
+        
+        if (ratings <= 5.0) {
+            return (
+                <div className="rating">
+                    <div className="relative top-[-50px] left-2 ratings text-white bg-[#FB5E2D] font-bold font-[Mypoppins] backdrop-blur-md h-[39px] w-[46px] text-center flex justify-center items-center rounded-[5px]">
+                        {ratings}
+                    </div>
+                </div>
+            )
+        }
+        else if (ratings <= 7.0) {
+            return (
+                <div className="rating">
+                    <div className="relative top-[-50px] left-2 ratings bg-[#EFE177] font-bold font-[Mypoppins] backdrop-blur-md h-[39px] w-[46px] text-center flex justify-center items-center rounded-[5px]">
+                        {ratings}
+                    </div>
+                </div>
+    
+            )
+        }
+        else {
+            return (
+                <div className="rating">
+                    <div className="relative top-[-50px] left-2 ratings bg-[#7EE084] font-bold font-[Mypoppins] backdrop-blur-md h-[39px] w-[46px] text-center flex justify-center items-center rounded-[5px]">
+                        {ratings}
+                    </div>
+                </div>
+            )
+        }
+    }
+    
+
     return (
         <div className="m-3 mt-[50px] font-[Mypoppins]">
             <div className="flex justify-between mb-[30px]">
@@ -49,14 +82,14 @@ const Series = ({ limit }) => {
             <ul className="flex items-center justify-start gap-[70px]  flex-wrap">
                 {series.slice(0, limit || series.length).map((item, i) => ( 
                     <li key={i} className="self-start">
-                        <button className=' cursor-pointer'>
+                        <button  onClick={() => navigate(`/voting/${item._id}`)} className=' cursor-pointer'>
                             <img
                                 className="w-[189px] h-[259px] rounded-lg shadow-3xl"
                                 src={item.poster}
                                 alt="series poster"
                             />
-                            <div className="relative top-[-50px] left-2 font-bold font-[Mypoppins] ratings bg-[#7EE084] backdrop-blur-md h-[39px] w-[46px] text-center flex justify-center items-center rounded-[5px]">
-                                {item.rating}
+                            <div>
+                                {formatRatings(item.rating) }
                             </div>
                         </button>
                         <div className="flex flex-col gap-2 mt-[-10px]">
