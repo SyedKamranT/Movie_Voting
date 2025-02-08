@@ -84,7 +84,7 @@ const Series = ({ limit }) => {
                     <li key={i} className="self-start">
                         <button  onClick={() => navigate(`/voting/${item._id}`)} className=' cursor-pointer'>
                             <img
-                                className="w-[189px] h-[259px] rounded-lg shadow-3xl"
+                                className="w-[189px] h-[259px] rounded-lg  object-cover shadow-3xl"
                                 src={item.poster}
                                 alt="series poster"
                             />
@@ -105,7 +105,7 @@ const Series = ({ limit }) => {
                             {item.genre.split(",").map((word, index) => (
                                 <span
                                     key={index}
-                                    className="border-[#4CAF50] border-2 px-2 py-1 rounded text-sm"
+                                    className="border-[#4CAF50] px-2 py-1 rounded border-1   text-xs"
                                 >
                                     {word.trim()}
                                 </span>

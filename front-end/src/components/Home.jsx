@@ -41,7 +41,7 @@ const Home = () => {
   );
 
   return (
-    <div>
+    <div className=''>
       {/* Navbar with search functionality */}
       <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
