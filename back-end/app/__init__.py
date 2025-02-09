@@ -6,16 +6,16 @@ import os
 from flask_cors import CORS
 
 
-socketio = SocketIO(cors_allowed_origins="*")
+socketio = SocketIO(cors_allowed_origins="*", async_mode="threading", message_queue=None)
 jwt = JWTManager()  
 
 def create_app():
     app = Flask(__name__)
     load_dotenv() 
 
-    CORS(app)
+    CORS(app, resources={r"/*": {"origins": "*"}})
     
-    app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
+    app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY','default_secret_key')
     
     # Import and register routes
     from .routes import main_routes

@@ -59,10 +59,14 @@ def login():
 @main_routes.route('/movies', methods=['GET'])
 def get_movies():
     # Fetch movies from the movies collection
-    movies = list(db.movies.find({}, {"_id": 0}))  # Excluding the "_id" field in the response
+    movies = list(db.movies.find({}))  # Fetch all movies with all fields, including _id
+    
+    # Convert ObjectId to string for JSON serialization
+    for movie in movies:
+        movie['_id'] = str(movie['_id'])  # Convert ObjectId to string
     
     if movies:
-        return jsonify(movies), 200
+        return jsonify(movies), 200  # Return the movies as JSON
     else:
         return jsonify({"message": "No movies found"}), 404
 
@@ -70,7 +74,10 @@ def get_movies():
 @main_routes.route('/kids', methods=['GET'])
 def get_kid_shows():
     # Fetch kid shows from the kids collection
-    kids_show = list(db.kids_show.find({}, {"_id": 0}))  # Excluding the "_id" field in the response
+    kids_show = list(db.kids_show.find({}))
+    
+    for kid in kids_show:
+        kid['_id'] = str(kid['_id'])
     
     if kids_show:
         return jsonify(kids_show), 200
@@ -80,7 +87,10 @@ def get_kid_shows():
 @main_routes.route('/series', methods=['GET'])
 def get_webseries():
     # Fetch series from the series collection
-    web_series = list(db.web_series.find({}, {"_id": 0}))  # Excluding the "_id" field in the response
+    web_series = list(db.web_series.find({}))
+    
+    for web in web_series:
+        web['_id'] = str(web['_id'])
     
     if web_series:
         return jsonify(web_series), 200

@@ -31,10 +31,10 @@ function App() {
     {
       path: "/",
       element:<>
-      <Navbar authenticated = {isAuthenticated} set = {setIsAuthenticated} /><Coursel/>
       
       
-      <Movies/><Series/><Kids/>
+      
+      <Home/>
       </>
     },
     {
@@ -55,13 +55,18 @@ function App() {
     {
       path: "/kids",
       element:<> <Navbar authenticated = {isAuthenticated} set = {setIsAuthenticated} /><Kids/></>
+    },
+    {
+      path: "/voting/:id",
+      element:<> <Navbar authenticated = {isAuthenticated} set = {setIsAuthenticated} />
+      <Voting/></>
     }
     
     
   ])
 
   return (
-    <div>
+    <div className=" bg-[#EFF2F0]">
       {/* {isAuthenticated ? (
         <> */}
         <RouterProvider router={router} />
