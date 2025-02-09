@@ -7,7 +7,7 @@ def on_connect():
     emit('message', {"message": "Welcome to the Real-Time Server"})
     
     
-@socketio.on('disconnet')
+@socketio.on('disconnect')
 def on_disconnet():
     print(" Client disconnected")
 
