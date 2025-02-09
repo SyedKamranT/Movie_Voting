@@ -9,7 +9,7 @@ import Kids from "./components/Kids";
 import Navbar from "./components/Navbar";
 import Coursel from "./components/Coursel"
 import Home from "./components/Home";
-import Signup from "./components/signup";
+import Signup from "./components/Signup";
 import "./App.css";
 
 function App() {
