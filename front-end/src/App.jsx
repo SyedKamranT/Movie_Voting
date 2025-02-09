@@ -9,6 +9,7 @@ import Kids from "./components/Kids";
 import Navbar from "./components/Navbar";
 import Coursel from "./components/Coursel"
 import Home from "./components/Home";
+import Signup from "./components/signup";
 import "./App.css";
 
 function App() {
@@ -60,6 +61,10 @@ function App() {
       path: "/voting/:id",
       element:<> <Navbar authenticated = {isAuthenticated} set = {setIsAuthenticated} />
       <Voting/></>
+    },
+    {
+      path: "/signup",
+      element:<> <Signup setIsAuthenticated={setIsAuthenticated} /></>
     }
     
     

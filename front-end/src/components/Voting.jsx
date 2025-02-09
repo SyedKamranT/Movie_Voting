@@ -4,13 +4,17 @@ import axios from 'axios';
 import casteImg from '../images/castimg.png'
 import { FaPlay, FaStar, FaShareAlt } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import {RotatingLines} from 'react-loader-spinner'
+import { RotatingLines } from 'react-loader-spinner';
+import { io } from 'socket.io-client';
+import VotingPopup from './VotingPopup';
 
 const Voting = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [contentAll, setcontentAll] = useState([]);
   const [error, setError] = useState("");
+  const [socket] = useState(() => io('http://127.0.0.1:8889'));
+  const [isVotingOpen, setIsVotingOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,13 +84,13 @@ const Voting = () => {
 
   const handleTrailer = (item) => {
     console.log(item.trailer)
-   
-    
-            return(
-              <div className=' w-full'>
-                <video src={item.trailer} controls></video>
-              </div>
-            )
+
+
+    return (
+      <div className=' w-full'>
+        <video src={item.trailer} controls></video>
+      </div>
+    )
   }
 
 
@@ -94,19 +98,19 @@ const Voting = () => {
     <div>
       <div className='md:max-lg:mx-[50px] mx-[120px] mt-[20px] max-md:m-2 font-[Mypoppins]'>
         {mainItem.length === 0 ? (
-         <div className=' flex justify-center items-center h-screen'>
-           <RotatingLines className=" "
-          visible={true}
-          height="96"
-          width="80"
-          color="grey"
-          strokeWidth="5"
-          animationDuration="0.75"
-          ariaLabel="rotating-lines-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          />
-         </div>
+          <div className=' flex justify-center items-center h-screen'>
+            <RotatingLines className=" "
+              visible={true}
+              height="96"
+              width="80"
+              color="grey"
+              strokeWidth="5"
+              animationDuration="0.75"
+              ariaLabel="rotating-lines-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          </div>
         ) : (
           mainItem.map((item) => {
             console.log("Item Data:", item); // Debugging log
@@ -163,7 +167,7 @@ const Voting = () => {
 
                         {/* Storyline */}
                         <div>
-                          <p className= ' md:max-lg:text-[14px]  max-sm:text-[14px] max-sm:mt-[18px]  text-[#153F29B2] mt-[24px] text-[16px] font-[700] tracking-[1.5px]'>Storyline</p>
+                          <p className=' md:max-lg:text-[14px]  max-sm:text-[14px] max-sm:mt-[18px]  text-[#153F29B2] mt-[24px] text-[16px] font-[700] tracking-[1.5px]'>Storyline</p>
                           <div className=' lg:max-xl:w-full md:max-lg:text-[16px] md:max-lg:w-full max-sm:text-[15px] max-sm:w-full  text-[17px] font-[400] leading-[20px] mt-[10px] w-2/3 text-justify'>{item.storyline}</div>
                         </div>
 
@@ -174,7 +178,10 @@ const Voting = () => {
 
                         {/* Vote and Play Buttons */}
                         <div className='flex justify-start items-center gap-2 mt-4'>
-                          <button className='md:max-lg:px-[18px] max-sm:px-[18px] max-sm:py-[10px] max-sm:text-[12px] flex justify-center items-center gap-2 bg-[#81E687] text-[#153F29] px-[22px] py-[13px] rounded-[9px] text-[14px] font-[700] tracking-[2px] max-sm:tracking-[1px] cursor-pointer'>
+                          <button
+                            onClick={() => setIsVotingOpen(true)}
+                            className='md:max-lg:px-[18px] max-sm:px-[18px] max-sm:py-[10px] max-sm:text-[12px] flex justify-center items-center gap-2 bg-[#81E687] text-[#153F29] px-[22px] py-[13px] rounded-[9px] text-[14px] font-[700] tracking-[2px] max-sm:tracking-[1px] cursor-pointer'
+                          >
                             <FaStar /> VOTE MOVIE
                           </button>
                           <button onClick={() => handleTrailer(item)} className='md:max-lg:px-[18px] max-sm:px-[18px] max-sm:py-[10px] max-sm:text-[12px] flex justify-center items-center gap-2 border-2 border-[#153F29] text-[#153F29] px-[22px] py-[13px] rounded-[9px] text-[14px] font-[700] tracking-[2px] max-sm:tracking-[1px] cursor-pointer'>
@@ -297,6 +304,27 @@ const Voting = () => {
           })
         )}
       </div>
+      <VotingPopup
+        isOpen={isVotingOpen}
+        onClose={() => setIsVotingOpen(false)}
+        movieId={params.id}
+        socket={socket}
+        onVoteSubmit={(voteData) => {
+          // Optionally update the UI immediately after vote
+          const updatedItem = { ...mainItem[0] };
+          updatedItem.votes += 1;
+          updatedItem.reviews.push({
+            user: "You", // Or get actual username if available
+            rating: voteData.rating,
+            comment: voteData.comment
+          });
+          setcontentAll(prev =>
+            prev.map(item =>
+              item._id === params.id ? updatedItem : item
+            )
+          );
+        }}
+      />
     </div>
   )
 }
