@@ -60,7 +60,7 @@ const Movies = ({ limit }) => {
     }
 
     return (
-        <div className="m-3 mt-[50px] font-[Mypoppins]">
+        <div className="m-3 mt-[50px]  font-[Mypoppins]">
             <div className="flex justify-between mb-[30px]">
                 <div className="font-custom text-[24px] font-extrabold">
                     TOP RATED MOVIES
@@ -77,7 +77,7 @@ const Movies = ({ limit }) => {
 
             {error && <p style={{ color: "red" }}>{error}</p>}
 
-            <ul className="flex items-center justify-start gap-[70px] flex-wrap">
+            <ul className=" flex items-center justify-start gap-[70px] flex-wrap">
                 {movies.slice(0, limit || movies.length).map((movie, i) => (
                     <li key={i} className="self-start">
                         <button className=" cursor-pointer"
@@ -85,7 +85,7 @@ const Movies = ({ limit }) => {
                                       navigate(`/voting/${movie._id}`)
                             }}>
                             <img
-                                className="w-[189px] h-[259px] rounded-lg shadow-3xl"
+                                className="w-[189px] h-[259px] rounded-lg shadow-3xl object-cover"
                                 src={movie.poster}
                                 alt="movie poster"
                             />

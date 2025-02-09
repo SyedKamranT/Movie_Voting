@@ -15,7 +15,7 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
   }, []);
 
   return (
-    <div className="m-0 p-0 relative z-50 font-[Mypoppins]">
+    <div className="m-0 p-0 relative z-50  font-[Mypoppins]">
       <nav className="flex items-center bg-[#153F29] justify-between h-16 rounded-xl m-2 p-4 relative md:h-20">
         {/* Left Side: Logo & Hamburger */}
         <div className="flex items-center w-full md:w-auto">
