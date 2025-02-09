@@ -17,7 +17,7 @@ const Login = ({ setIsAuthenticated }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://127.0.0.1:8889/login", {
+      const response = await axios.post("https://movie-voting-u7oh.onrender.com/login", {
         username,
         password,
       });

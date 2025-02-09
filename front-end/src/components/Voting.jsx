@@ -13,15 +13,15 @@ const Voting = () => {
   const navigate = useNavigate();
   const [contentAll, setcontentAll] = useState([]);
   const [error, setError] = useState("");
-  const [socket] = useState(() => io('http://127.0.0.1:8889'));
+  const [socket] = useState(() => io('https://movie-voting-u7oh.onrender.com'));
   const [isVotingOpen, setIsVotingOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const moviesRes = await axios.get("http://127.0.0.1:8889/movies");
-        const seriesRes = await axios.get("http://127.0.0.1:8889/series");
-        const kidsRes = await axios.get("http://127.0.0.1:8889/kids");
+        const moviesRes = await axios.get("https://movie-voting-u7oh.onrender.com/movies");
+        const seriesRes = await axios.get("https://movie-voting-u7oh.onrender.com/series");
+        const kidsRes = await axios.get("https://movie-voting-u7oh.onrender.com/kids");
 
         const combinedData = [
           ...moviesRes.data.map(item => ({ ...item, category: "Movie" })),
