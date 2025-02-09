@@ -77,7 +77,7 @@ const Movies = ({ limit }) => {
 
             {error && <p style={{ color: "red" }}>{error}</p>}
 
-            <ul className="flex items-center justify-start gap-[70px] flex-wrap">
+            <ul className=" flex items-center justify-start gap-[70px] flex-wrap">
                 {movies.slice(0, limit || movies.length).map((movie, i) => (
                     <li key={i} className="self-start">
                         <button className=" cursor-pointer"

@@ -4,6 +4,7 @@ import axios from 'axios';
 import casteImg from '../images/castimg.png'
 import { FaPlay, FaStar, FaShareAlt } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import {RotatingLines} from 'react-loader-spinner'
 
 const Voting = () => {
   const params = useParams();
@@ -91,9 +92,21 @@ const Voting = () => {
 
   return (
     <div>
-      <div className='mx-[120px] mt-[20px] max-md:m-2 font-[Mypoppins]'>
+      <div className='md:max-lg:mx-[50px] mx-[120px] mt-[20px] max-md:m-2 font-[Mypoppins]'>
         {mainItem.length === 0 ? (
-          <p className="text-center text-gray-500">Loading or No Data Found...</p>
+         <div className=' flex justify-center items-center h-screen'>
+           <RotatingLines className=" "
+          visible={true}
+          height="96"
+          width="80"
+          color="grey"
+          strokeWidth="5"
+          animationDuration="0.75"
+          ariaLabel="rotating-lines-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          />
+         </div>
         ) : (
           mainItem.map((item) => {
             console.log("Item Data:", item); // Debugging log
@@ -107,11 +120,11 @@ const Voting = () => {
                   <div className=' flex flex-col gap-[20px] bg- max-sm:w-full  max-md:w-full'>
                     <img className='  w-[350px] h-[434px] rounded-[9px] object-cover max-sm:self-center' src={item.poster} alt={item.title} />
                     {/* ⭐ Rating Display */}
-                    <div className=' min-sm:w-full flex justify-between items-center bg-[#153F29] text-white p-[20px] rounded-[9px] min-lg:w-[285px] h-[106px]'>
+                    <div className='lg:gap-2 md:max-lg:gap-2 min-md::w-full flex justify-between items-center bg-[#153F29] text-white p-[20px] rounded-[9px]  h-[106px]'>
                       {/* left rating */}
-                      <div className='flex flex-col gap-2 items-start'>
-                        <p className='min-sm:text-[16px] text-[14px] text-white/70 font-[600]'>Ratings</p>
-                        <div className=' min-sm:gap-2.5 flex items-center gap-1'>
+                      <div className=' flex flex-col gap-2 items-start'>
+                        <p className='min-md:text-[16px] text-[14px] text-white/70 font-[600]'>Ratings</p>
+                        <div className='lg:max-xl:gap-1.5  md:max-lg:gap-1 flex items-center gap-1'>
                           {[1, 2, 3, 4, 5].map((star) => (
                             <FaStar
                               key={star}
@@ -119,7 +132,7 @@ const Voting = () => {
                             />
                           ))}
                         </div>
-                        <span className='min-sm:text-[14px] text-[12px] font-[500] text-white/70 '>{item.votes}+ Votes</span>
+                        <span className='min-md:text-[14px] text-[12px] font-[500] text-white/70 '>{item.votes}+ Votes</span>
                       </div>
                       {/* Right rating */}
                       <div className=" top-[-50px] left-2 ratings bg-[#7EE084] font-bold font-[Mypoppins] backdrop-blur-md h-[39px] w-[46px] text-center flex justify-center items-center rounded-[5px]">
@@ -129,18 +142,18 @@ const Voting = () => {
                   </div>
                   {/* Right Part */}
                   <div className=' flex flex-col gap-[20px] max-md:w-full'>
-                    <div className='max-sm:h-full max-sm:p-[20px] flex flex-col p-[30px] h-[434px] justify-between items-stretch bg-white rounded-[9px]  w-full'>
-                      <div>
+                    <div className='rightdiv md:max-lg:p-[20px] max-sm:h-full max-sm:p-[20px] flex flex-col p-[30px] h-[434px] justify-between items-stretch bg-white rounded-[9px]  w-full'>
+                      <div className='md:max-lg:h-full md:max-lg:flex md:max-lg:flex-col md:max-lg:justify-between '>
                         <div className='max-sm:gap-1.5 flex flex-col gap-2'>
                           <div className='flex justify-between items-center'>
-                            <div className='max-sm:text-3xl max-sm:leading-[36px] text-[48px] font-[600] leading-[72px]'>{item.title}</div>
-                            <button className='cursor-pointer'><FaShareAlt className='max-sm:text-2xl text-3xl' /></button>
+                            <div className='md:max-lg:text-[34px] md:max-lg:leading-[40px] max-sm:text-3xl max-sm:leading-[36px] text-[48px] font-[600] leading-[72px]'>{item.title}</div>
+                            <button className='cursor-pointer'><FaShareAlt className='md:max-lg:text-xl max-sm:text-2xl text-3xl' /></button>
                           </div>
-                          <div className='max-sm:text-[16px]  text-[#153F29B2] text-[20px]'>{item.year} . Directed By {item.director}</div>
+                          <div className='md:max-lg:text-[18px] max-sm:text-[16px]  text-[#153F29B2] text-[20px]'>{item.year} . Directed By {item.director}</div>
                         </div>
 
                         {/* Genre */}
-                        <div className='max-sm:mt-[18px] max-sm:text-[12px] flex mt-[24px] gap-[7px] text-[14px] font-[600]'>
+                        <div className='md:max-lg:mt-[20px] md:max-lg:text-[12px] max-sm:mt-[18px] max-sm:text-[12px] flex mt-[24px] gap-[7px] text-[14px] font-[600]'>
                           {item.genre?.split(",").map((word, index) => (
                             <span key={index} className="border-[#4CAF50] border-1 px-[9px] py-[6px] rounded">
                               {word.trim()}
@@ -150,21 +163,21 @@ const Voting = () => {
 
                         {/* Storyline */}
                         <div>
-                          <p className= '  max-sm:text-[14px] max-sm:mt-[18px]  text-[#153F29B2] mt-[24px] text-[16px] font-[700] tracking-[1.5px]'>Storyline</p>
-                          <div className=' max-sm:text-[15px] max-sm:w-full  text-[17px] font-[400] leading-[20px] mt-[10px] w-2/3 text-justify'>{item.storyline}</div>
+                          <p className= ' md:max-lg:text-[14px]  max-sm:text-[14px] max-sm:mt-[18px]  text-[#153F29B2] mt-[24px] text-[16px] font-[700] tracking-[1.5px]'>Storyline</p>
+                          <div className=' lg:max-xl:w-full md:max-lg:text-[16px] md:max-lg:w-full max-sm:text-[15px] max-sm:w-full  text-[17px] font-[400] leading-[20px] mt-[10px] w-2/3 text-justify'>{item.storyline}</div>
                         </div>
 
                         {/* Line */}
-                        <div className='max-sm:w-full h-[1px] w-2/3 flex justify-center bg-[#153F29]/50 my-[18px]'></div>
+                        <div className='lg:max-xl:w-full md:max-lg:w-full max-sm:w-full h-[1px] w-2/3 flex justify-center bg-[#153F29]/50 my-[18px]'></div>
 
 
 
                         {/* Vote and Play Buttons */}
                         <div className='flex justify-start items-center gap-2 mt-4'>
-                          <button className='max-sm:px-[18px] max-sm:py-[10px] max-sm:text-[12px] flex justify-center items-center gap-2 bg-[#81E687] text-[#153F29] px-[22px] py-[13px] rounded-[9px] text-[14px] font-[700] tracking-[2px] max-sm:tracking-[1px] cursor-pointer'>
+                          <button className='md:max-lg:px-[18px] max-sm:px-[18px] max-sm:py-[10px] max-sm:text-[12px] flex justify-center items-center gap-2 bg-[#81E687] text-[#153F29] px-[22px] py-[13px] rounded-[9px] text-[14px] font-[700] tracking-[2px] max-sm:tracking-[1px] cursor-pointer'>
                             <FaStar /> VOTE MOVIE
                           </button>
-                          <button onClick={() => handleTrailer(item)} className=' max-sm:px-[18px] max-sm:py-[10px] max-sm:text-[12px] flex justify-center items-center gap-2 border-2 border-[#153F29] text-[#153F29] px-[22px] py-[13px] rounded-[9px] text-[14px] font-[700] tracking-[2px] max-sm:tracking-[1px] cursor-pointer'>
+                          <button onClick={() => handleTrailer(item)} className='md:max-lg:px-[18px] max-sm:px-[18px] max-sm:py-[10px] max-sm:text-[12px] flex justify-center items-center gap-2 border-2 border-[#153F29] text-[#153F29] px-[22px] py-[13px] rounded-[9px] text-[14px] font-[700] tracking-[2px] max-sm:tracking-[1px] cursor-pointer'>
                             <FaPlay /> VIEW TRAILER
                           </button>
                         </div>
@@ -173,18 +186,18 @@ const Voting = () => {
 
                     </div>
                     {/* Cast */}
-                    <div className=' bg-white max-sm:p-5  w-full p-7.5 rounded-[9px]'>
+                    <div className=' md:max-lg:[20px] bg-white max-sm:p-5  w-full p-7.5 rounded-[9px]'>
                       {/* heading */}
                       <p className=' max-sm:text-[14px] text-[#153F29B2]  text-[16px] font-[700] tracking-[1.5px]'>Cast</p>
                       {/* Cast List */}
-                      <div className=' max-sm:grid-cols-2 max-sm:gap-[20px] mt-[30px] gap-[30px] grid grid-cols-3'>
+                      <div className='md:max-lg:grid-cols-2 md:max-lg:gap-[25px] max-sm:grid-cols-2 max-sm:gap-[20px] mt-[30px] gap-[30px] grid grid-cols-3'>
                         {item.cast.map((castitem, index) => {
                           return (
 
-                            <div key={index} className='flex max-sm:gap-2 gap-3'>
+                            <div key={index} className='md:max-lg:gap-2 flex max-sm:gap-2 gap-3'>
                               <div><img className='w-[50px] rounded-[5px] ' src={casteImg} alt="" /></div>
                               <div>
-                                <div className=' text-[#153F29] max-sm:text-[14px] max-sm:leading-[18px]  text-[16px] font-[500] leading-[24px]'>{castitem}</div>
+                                <div className=' md:max-lg:text-[14px] md:max-lg:leading-[20px] text-[#153F29] max-sm:text-[14px] max-sm:leading-[18px]  text-[16px] font-[500] leading-[24px]'>{castitem}</div>
                                 <div className='text-[#153F29]/50  max-sm:text-[12px] text-[14px] font-[500] tracking-[1px]'>Actor</div>
                               </div>
 
@@ -235,7 +248,7 @@ const Voting = () => {
                     </button>
 
                   </div>
-                  <ul className=" min-sm:justify-start min-sm:gap-[55px] min-lg:gap-[30px] max-sm:items-center max-sm:justify-center max-sm:gap-[10px] flex items-center  min-lg:justify-between  flex-wrap">
+                  <ul className=" lg:max-xl:justify-start lg:max-xl:gap-[108px] md:max-lg:gap-12 min-md:justify-start min-md:gap-[55px] min-lg:gap-[30px] max-sm:items-center max-sm:justify-center max-sm:gap-[10px] flex items-center  min-lg:justify-between  flex-wrap">
                     {suggestions(item).slice(0, 5).map((suggest, i) => (
                       <li key={i} className="self-start">
                         <button className=" cursor-pointer"
