@@ -118,7 +118,7 @@ const Voting = () => {
                 <div className='flex max-md:flex-wrap gap-[20px]'>
                   {/* Left part */}
                   <div className=' flex flex-col gap-[20px] bg- max-sm:w-full  max-md:w-full'>
-                    <img className='  w-[350px] h-[434px] rounded-[9px] object-cover max-sm:self-center' src={item.poster} alt={item.title} />
+                    <img className=' min-w-[350px] max-w-[350px] h-[434px] rounded-[9px] object-cover max-sm:self-center' src={item.poster} alt={item.title} />
                     {/* ⭐ Rating Display */}
                     <div className='lg:gap-2 md:max-lg:gap-2 min-md::w-full flex justify-between items-center bg-[#153F29] text-white p-[20px] rounded-[9px]  h-[106px]'>
                       {/* left rating */}
@@ -142,7 +142,7 @@ const Voting = () => {
                   </div>
                   {/* Right Part */}
                   <div className=' flex flex-col gap-[20px] max-md:w-full'>
-                    <div className='rightdiv md:max-lg:p-[20px] max-sm:h-full max-sm:p-[20px] flex flex-col p-[30px] h-[434px] justify-between items-stretch bg-white rounded-[9px]  w-full'>
+                    <div className='rightdiv md:max-lg:p-[20px] max-sm:h-full max-sm:p-[20px] flex flex-col p-[30px] min-h-[434px] justify-between items-stretch bg-white rounded-[9px]  w-full'>
                       <div className='md:max-lg:h-full md:max-lg:flex md:max-lg:flex-col md:max-lg:justify-between '>
                         <div className='max-sm:gap-1.5 flex flex-col gap-2'>
                           <div className='flex justify-between items-center'>
