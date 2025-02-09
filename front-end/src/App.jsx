@@ -66,7 +66,7 @@ function App() {
   ])
 
   return (
-    <div>
+    <div className=" bg-[#EFF2F0]">
       {/* {isAuthenticated ? (
         <> */}
         <RouterProvider router={router} />

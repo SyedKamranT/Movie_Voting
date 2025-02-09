@@ -87,7 +87,7 @@ const Kids = ({limit}) => {
                         navigate(`/voting/${Kids._id}`)
                       }} className=' cursor-pointer'>
                           <img
-                              className="     w-[189px] h-[259px] rounded-lg shadow-3xl"
+                              className="     w-[189px] object-cover  h-[259px] rounded-lg shadow-3xl"
                               src={Kids.poster}
                               alt="Kids poster"
                           />
