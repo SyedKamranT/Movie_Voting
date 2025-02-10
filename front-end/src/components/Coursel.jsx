@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import corosal1 from "../assets/corosal.png";
-import corosal2 from "../assets/corosal.png";
-import corosal3 from "../assets/corosal.png";
+import corosal2 from "../assets/corosal2.png";
+import corosal3 from "../assets/corosal3.png";
+import corosal4 from "../assets/corosal4.png";
 
 const Carousel = () => {
 
