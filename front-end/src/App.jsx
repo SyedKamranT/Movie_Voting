@@ -15,6 +15,7 @@ import "./App.css";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   
+  
 
   useEffect(() => {
     // Check if the user has a valid token
@@ -35,9 +36,7 @@ function App() {
       path: "/",
       element:<>
       
-      
-      
-      <Home/>
+      <Home />
       </>
     },
     {
@@ -49,20 +48,21 @@ function App() {
     
     {
       path: "/movies",
-      element:<><Navbar authenticated = {isAuthenticated} set = {setIsAuthenticated} /><Movies/></>
+      element:<>
+     <Movies /></>
     },
     {
       path: "/series",
-      element:<><Navbar authenticated = {isAuthenticated} set = {setIsAuthenticated} /><Series/></>
+      element: <><Series /></>
     },
     {
       path: "/kids",
-      element:<> <Navbar authenticated = {isAuthenticated} set = {setIsAuthenticated} /><Kids/></>
+      element:<><Kids /></>
     },
     {
       path: "/voting/:id",
-      element:<> <Navbar authenticated = {isAuthenticated} set = {setIsAuthenticated} />
-      <Voting/></>
+      element:<><Navbar   />
+      <Voting /></>
     },
     {
       path: "/signup",
@@ -73,25 +73,11 @@ function App() {
   ])
 
   return (
-    <div className=" bg-[#EFF2F0]">
-      {/* {isAuthenticated ? (
-        <> */}
+   
+    <div className="bg-[#EFF2F0]">
         <RouterProvider router={router} />
-        {/* <Movies /> */}
-          
-          {/* <button
-            onClick={() => {
-              localStorage.removeItem("token"); // Logout
-              setIsAuthenticated(false);
-            }}
-          >
-            Logout
-          </button> */}
-        {/* </>
-      ) : (
-        <Login setIsAuthenticated={setIsAuthenticated} />
-      )} */}
     </div>
+
   );
 }
 
