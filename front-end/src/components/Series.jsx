@@ -93,14 +93,14 @@ const Series = ({ limit, isHomepage}) => {
                                      ariaLabel="rotating-lines-loading"
                                  />
                              </div>
-                         ) : ( <div className="m-3 mt-[50px] font-[Mypoppins]">
-                            <div className=" text-[#153f29] flex justify-between mb-[30px]">
-                                <div className="font-custom text-[24px] font-extrabold">
+                         ) : ( <div className="m-3 mt-[50px] sm:mt-[50px] font-[Mypoppins]">
+                            <div className=" text-[#153f29]  max-sm:mt-[80px] flex items-center justify-between mb-[30px]">
+                                <div className=" max-sm:text-[16px] sm:text-[24px] font-custom text-[24px] font-extrabold">
                                     TOP RATED SERIES
                                 </div>
                                 {limit && (
                                     <button
-                                        className="font-custom cursor-pointer hover:underline"
+                                        className="max-sm:text-[12px] sm:text-base  font-custom cursor-pointer hover:underline"
                                         onClick={() => navigate("/series")}
                                     >
                                         VIEW ALL
@@ -137,12 +137,12 @@ const Series = ({ limit, isHomepage}) => {
                             )}
                           </ul>
                         </div>
-                      ) :<><ul className="flex items-center justify-start gap-[70px]  flex-wrap">
+                      ) :<><ul className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-[30px]">
                       {series.slice(0, limit || series.length).map((item, i) => ( 
                           <li key={i} className="self-start">
                               <button  onClick={() => navigate(`/voting/${item._id}`)} className=' cursor-pointer'>
                                   <img
-                                      className="w-[189px] h-[259px] rounded-lg  object-cover shadow-3xl"
+                                      className="max-sm:w-[169px] max-sm:h-[248px] max-sm:object-cover sm:h-[259px]   w-full h-[200px]  object-cover   rounded-lg shadow-xl"
                                       src={item.poster}
                                       alt="series poster"
                                   />
@@ -150,20 +150,20 @@ const Series = ({ limit, isHomepage}) => {
                                       {formatRatings(item.rating) }
                                   </div>
                               </button>
-                              <div className="flex flex-col gap-2 mt-[-10px]">
-                                  <div className="font-[Mypoppins] font-[700] text-[#153F29] w-[189px] tracking-[1.5px]">
+                              <div className="flex max-sm:w-[169px] flex-col gap-1 mt-1 sm:mt-[-10px]">
+                                  <div className="font-[Mypoppins] font-[700] text-[#153F29] max-sm:w-[169px] sm:text-base tracking-wide">
                                       {item.title}
                                   </div>
                 
-                                  <div className="text-[#153F29B2] font-[500]">
+                                  <div className="text-[#153F29B2] max-sm:w-[169px] font-[500] text-xs sm:text-sm">
                                       {item.year} • {formatVotes(item.votes)} + votes
                                   </div>
                               </div>
-                              <div className="flex flex-wrap items-center gap-2 w-[189px] mt-2">
+                              <div className="flex flex-wrap max-sm:w-[169px] gap-1 sm:gap-2 mt-1 sm:mt-2">
                                   {item.genre.split(",").map((word, index) => (
                                       <span
                                           key={index}
-                                          className="border-[#4CAF50] px-2 py-1 rounded border-1   text-xs"
+                                          className="border-[#4CAF50] border px-2 py-1 rounded  text-[10px] sm:text-xs"
                                       >
                                           {word.trim()}
                                       </span>
