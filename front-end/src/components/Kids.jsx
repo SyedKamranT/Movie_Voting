@@ -12,7 +12,7 @@ const Kids = ({limit}) => {
   useEffect(() => {
       const fetchKids = async () => {
           try {
-              const response = await axios.get("http://127.0.0.1:8889/kids");
+              const response = await axios.get("https://movie-voting-u7oh.onrender.com/kids");
               setKids(response.data);
           } catch (err) {
               setError("Failed to fetch Kids. Maybe your token expired.");
