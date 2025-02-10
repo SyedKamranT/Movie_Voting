@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner';
 import { io } from 'socket.io-client';
 import VotingPopup from './VotingPopup';
+import VideoPopup from './Youtube';
 
 const Voting = () => {
   const params = useParams();
@@ -15,6 +16,7 @@ const Voting = () => {
   const [error, setError] = useState("");
   const [socket] = useState(() => io('https://movie-voting-u7oh.onrender.com'));
   const [isVotingOpen, setIsVotingOpen] = useState(false);
+  const [isTrailerOpen, setIsTrailerOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,15 +85,8 @@ const Voting = () => {
   }
 
   const handleTrailer = (item) => {
-    console.log(item.trailer)
-
-
-    return (
-      <div className=' w-full'>
-        <video src={item.trailer} controls></video>
-      </div>
-    )
-  }
+    setIsTrailerOpen(true);
+  };
 
 
   return (
@@ -324,6 +319,12 @@ const Voting = () => {
             )
           );
         }}
+      />
+
+      <VideoPopup
+        videoUrl={mainItem[0]?.trailer}
+        isOpen={isTrailerOpen}
+        onClose={() => setIsTrailerOpen(false)}
       />
     </div>
   )
