@@ -17,7 +17,7 @@ const Login = ({ setIsAuthenticated }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://127.0.0.1:8889/login", {
+      const response = await axios.post("https://movie-voting-u7oh.onrender.com/login", {
         username,
         password,
       });
@@ -27,7 +27,7 @@ const Login = ({ setIsAuthenticated }) => {
       localStorage.setItem("username", username);
 
       setMessage("Login successful!");
-      window.location.href = "http://localhost:5173/"
+      window.location.href = "https://movievotingramov.vercel.app/"
       setError("");
 
       // Update authentication state

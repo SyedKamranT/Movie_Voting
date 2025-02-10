@@ -11,7 +11,7 @@ const Series = ({ limit }) => {
     useEffect(() => {
         const fetchSeries = async () => {
             try {
-                const response = await axios.get("http://127.0.0.1:8889/series");
+                const response = await axios.get("https://movie-voting-u7oh.onrender.com/series");
                 setSeries(response.data);
             } catch (err) {
                 setError("Failed to fetch series. Maybe your token expired.");

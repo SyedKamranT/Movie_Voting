@@ -15,9 +15,9 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const moviesRes = await axios.get("http://127.0.0.1:8889/movies");
-        const seriesRes = await axios.get("http://127.0.0.1:8889/series");
-        const kidsRes = await axios.get("http://127.0.0.1:8889/kids");
+        const moviesRes = await axios.get("https://movie-voting-u7oh.onrender.com/movies");
+        const seriesRes = await axios.get("https://movie-voting-u7oh.onrender.com/series");
+        const kidsRes = await axios.get("https://movie-voting-u7oh.onrender.com/kids");
 
         // Merge all content into one array with category labels
         const combinedData = [

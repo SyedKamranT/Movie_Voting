@@ -9,13 +9,16 @@ import Kids from "./components/Kids";
 import Navbar from "./components/Navbar";
 import Coursel from "./components/Coursel"
 import Home from "./components/Home";
+import Signup from "./components/Signup";
 import "./App.css";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
 
   useEffect(() => {
     // Check if the user has a valid token
+    
     const token = localStorage.getItem("token");
     if (token) {
       setIsAuthenticated(true);
@@ -60,6 +63,10 @@ function App() {
       path: "/voting/:id",
       element:<> <Navbar authenticated = {isAuthenticated} set = {setIsAuthenticated} />
       <Voting/></>
+    },
+    {
+      path: "/signup",
+      element:<> <Signup setIsAuthenticated={setIsAuthenticated} /></>
     }
     
     

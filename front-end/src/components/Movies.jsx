@@ -11,7 +11,7 @@ const Movies = ({ limit }) => {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const response = await axios.get("http://127.0.0.1:8889/movies");
+                const response = await axios.get("https://movie-voting-u7oh.onrender.com/movies");
                 setMovies(response.data);
             } catch (err) {
                 setError("Failed to fetch movies. Maybe your token expired.");

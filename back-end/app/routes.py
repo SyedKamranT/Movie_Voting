@@ -18,10 +18,15 @@ MONGO_URI = os.getenv('MONGO_URI')
 client = MongoClient(MONGO_URI)
 db = client["movie_voting"]  # Change to your database name if needed
 
+
+
 # User Signup Route
 @main_routes.route('/signup', methods=['POST'])
 def signup():
     data = request.json
+    
+    if not data.get("username") or not data.get("password"):
+        return jsonify({"message": "Username and password are required"}), 400
     
     # Hash the password
     hashed_pw = bcrypt.hashpw(data['password'].encode('utf-8'), bcrypt.gensalt())
@@ -40,19 +45,23 @@ def signup():
 @main_routes.route('/login', methods=['POST'])
 def login():
     data = request.json
+
+    # Find the user in the database by username
     user = db.users.find_one({"username": data['username']})
-    
+
     if user:
-        # Get the stored hashed password from the DB and encode it to bytes
-        stored_hashed_password = user['password'].encode('utf-8')  # Convert stored hash to bytes
-        
+        # Extract the stored hashed password (already stored as binary in MongoDB)
+        stored_hashed_password = user['password']
+
         # Check if the entered password matches the hashed password in the database
         if bcrypt.checkpw(data['password'].encode('utf-8'), stored_hashed_password):
-            # Generate JWT token if the credentials are correct
+            # Generate a JWT token if the credentials are correct
             token = create_access_token(identity=data['username'])
             return jsonify({"token": token}), 200
-    
+
+    # If username doesn't exist or password doesn't match
     return jsonify({"message": "Invalid credentials"}), 401
+
 
 
 # Fetch Movies Route (GET)
