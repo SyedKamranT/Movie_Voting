@@ -18,6 +18,8 @@ MONGO_URI = os.getenv('MONGO_URI')
 client = MongoClient(MONGO_URI)
 db = client["movie_voting"]  # Change to your database name if needed
 
+
+
 # User Signup Route
 @main_routes.route('/signup', methods=['POST'])
 def signup():

@@ -14,9 +14,11 @@ import "./App.css";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
 
   useEffect(() => {
     // Check if the user has a valid token
+    
     const token = localStorage.getItem("token");
     if (token) {
       setIsAuthenticated(true);
