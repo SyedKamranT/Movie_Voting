@@ -221,8 +221,8 @@ const Voting = () => {
 
                               <div><img className='w-[50px] rounded-[5px] ' src={casteImg} alt="" /></div>
                               <div>
-                                <div className='text-[16px] text-[#153F29]  font-[600] max-sm:leading-[18px] leading-[24px]'>{reviewitem.user}</div>
-                                <p className=' text-[14px] text-[#153F29] font-[400] max-sm:leading-[18px] leading-[24px]'>{reviewitem.comment}</p>
+                                <div className='text-[16px]  items-center flex text-[#153F29]  font-[600] max-sm:leading-[18px] leading-[24px]'>{reviewitem.user} <span className='ml-2 flex items-center' >  <FaStar className='text-[#4CAF50]' /><p className='pl-1 leading-1'> {reviewitem.rating}</p></span></div>
+                                <p className=' text-[14px] text-[#153F29] font-[400] max-sm:leading-[18px] leading-[24px]'>{reviewitem.comment}</p> 
                               </div>
                             </div>
                           )

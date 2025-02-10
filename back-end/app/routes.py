@@ -109,25 +109,21 @@ def get_webseries():
     else:
         return jsonify({"message": "No web series found"}), 404
     
-@voting_routes.route('/submit-vote', methods=['POST']) 
+@voting_routes.route('/submit-vote', methods=['POST'])
 def submit_vote():
     try:
-        data = request.json
+        data = request.get_json()
         movie_id = data.get('movieId')
         rating = data.get('rating')
         comment = data.get('comment')
-        
-        # Determine current user (if authenticated)
         current_user = 'Anonymous'
-
-        # Collections to check
+        # Existing update logic
         collections = [
             db.movies,
             db.web_series, 
             db.kids_show
         ]
 
-        # Try to update in each collection
         for collection in collections:
             result = collection.update_one(
                 {'_id': ObjectId(movie_id)},
@@ -144,19 +140,21 @@ def submit_vote():
             )
 
             if result.modified_count > 0:
-                # Emit socket event for real-time update
-                emit('vote_update', {
+                # Use current_app's socketio if available
+                from flask import current_app
+                socketio = current_app.extensions['socketio']
+                
+                socketio.emit('vote_update', {
                     'success': True, 
                     'movieId': movie_id,
                     'votes': result.modified_count
-                }, broadcast=True)
+                })
                 
                 return jsonify({
                     'success': True, 
                     'message': 'Vote submitted successfully'
                 }), 200
 
-        # If no collection was updated
         return jsonify({
             'success': False, 
             'message': 'Movie not found'
