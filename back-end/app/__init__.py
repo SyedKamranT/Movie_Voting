@@ -14,12 +14,15 @@ def create_app():
     load_dotenv() 
 
     CORS(app, resources={r"/*": {"origins": "*"}})
+    socketio = SocketIO(app, cors_allowed_origins="*")
     
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY','default_secret_key')
     
     # Import and register routes
     from .routes import main_routes
+    from .routes import voting_routes
     app.register_blueprint(main_routes)
+    app.register_blueprint(voting_routes)
     socketio.init_app(app)
     jwt.init_app(app)  
     
