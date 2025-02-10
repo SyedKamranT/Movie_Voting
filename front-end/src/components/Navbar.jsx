@@ -70,7 +70,7 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
           <div className="LOGOUT">
             {isAuthenticated ? (
               <button
-                className="text-[#153F29] min-md:px-3 min-md:py-2 bg-[#81E687] font-bold text-xs tracking-[1px] rounded-md px-4 py-3"
+                className="text-[#153F29] min-md:px-3 min-md:py-3 bg-[#81E687] font-bold text-xs tracking-[1px] rounded-md px-4 py-3"
                 onClick={() => {
                   localStorage.removeItem("token");
                   setIsAuthenticated(false);

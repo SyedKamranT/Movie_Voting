@@ -16,14 +16,10 @@ const VotingPopup = ({ isOpen, onClose, movieId, socket, onVoteSubmit }) => {
       const token = localStorage.getItem('token');
 
       // Submit vote via HTTP POST
-      const response = await axios.post('/api/submit-vote', {
+      const response = await axios.post('http://127.0.0.1:5000/api/submit-vote', {
         movieId,
         rating,
         comment
-      }, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
       });
 
       if (response.data.success) {
