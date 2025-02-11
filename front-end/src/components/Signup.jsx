@@ -27,7 +27,7 @@ const Signup = ({ setIsAuthenticated }) => {
       // Save token in localStorage
 
       setMessage(response.data.message);
-      window.location.href = "http://localhost:5173/"
+      window.location.href = "http://localhost:5173/login"
       setError("");
 
       // Update authentication state
