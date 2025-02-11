@@ -130,7 +130,7 @@ const Navbar = ({ limit, homepage, searchTerm, setSearchTerm }) => {
           <div>
             {isAuthenticated ? (
               <button
-                className="text-[#153F29] bg-[#81E687] font-bold text-xs tracking-[1px] rounded-md px-4 py-3"
+                className="text-[#153F29] bg-[#81E687] font-bold text-xs tracking-[1px] cursor-pointer rounded-md px-4 py-3"
                 onClick={() => {
                   localStorage.removeItem("token");
                   setIsAuthenticated(false);
@@ -141,7 +141,7 @@ const Navbar = ({ limit, homepage, searchTerm, setSearchTerm }) => {
             ) : (
               <button
                 onClick={() => window.location.href = "https://movievotingramov.vercel.app/login"}
-                className="text-[#153F29] bg-[#81E687] font-bold text-sm tracking-[1px] cursor-pointer rounded-md px-4 py-3"
+                className="text-[#153F29] cursor-pointer bg-[#81E687] font-bold text-xs tracking-[1px] rounded-md px-4 py-3"
               >
                 LOGIN
               </button>

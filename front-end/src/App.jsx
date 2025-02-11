@@ -36,7 +36,7 @@ function App() {
       path: "/",
       element:<>
       
-      <Home />
+      <Home  isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
       </>
     },
     {
@@ -49,20 +49,20 @@ function App() {
     {
       path: "/movies",
       element:<>
-     <Movies /></>
+     <Movies  isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} /></>
     },
     {
       path: "/series",
-      element: <><Series /></>
+      element: <><Series   isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated}/></>
     },
     {
       path: "/kids",
-      element:<><Kids /></>
+      element:<><Kids  isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} /></>
     },
     {
       path: "/voting/:id",
       element:<><Navbar   />
-      <Voting /></>
+      <Voting  isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated}/></>
     },
     {
       path: "/signup",
