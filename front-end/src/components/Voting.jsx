@@ -17,6 +17,7 @@ const Voting = () => {
   const [socket] = useState(() => io('https://movie-voting-u7oh.onrender.com'));
   const [isVotingOpen, setIsVotingOpen] = useState(false);
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
+  const [copied, setCopied] = useState(false); //newline
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +41,16 @@ const Voting = () => {
     fetchData();
   }, []);
 
-
+  function copy() {
+    const el = document.createElement("input");
+    el.value = window.location.href;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
 
   const mainItem = contentAll.filter((item) => item._id === params.id);
   const suggestions = (currentItem) => {
@@ -146,7 +156,7 @@ const Voting = () => {
                         <div className='max-sm:gap-1.5 flex flex-col gap-2'>
                           <div className='flex justify-between items-center'>
                             <div className='md:max-lg:text-[34px] md:max-lg:leading-[40px] max-sm:text-3xl max-sm:leading-[36px] text-[48px] font-[600] leading-[72px]'>{item.title}</div>
-                            <button className='cursor-pointer'><FaShareAlt className='md:max-lg:text-xl max-sm:text-2xl text-3xl' /></button>
+                            <button className='cursor-pointer ' onClick={copy}>{!copied ? "" : <p className='mb-3 font-[Mypoppins] font-medium transition-opacity duration-500 opacity-100 '>Copied!</p>}<FaShareAlt className='md:max-lg:text-xl max-sm:text-2xl text-3xl' /> </button>
                           </div>
                           <div className='md:max-lg:text-[18px] max-sm:text-[16px]  text-[#153F29B2] text-[20px]'>{item.year} . Directed By {item.director}</div>
                         </div>
