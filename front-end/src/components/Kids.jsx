@@ -119,7 +119,9 @@ const Kids = ({limit,isHomepage }) => {
                           {filteredContent.length > 0 ? (
                             filteredContent.map((item, index) => (
                               <li key={index} className="w-[200px]">
-                                <button className=' cursor-pointer'>
+                                <button onClick={()=>{
+                                                navigate(`voting/${item._id}`)
+                                            }} className=' cursor-pointer'>
                                   <img
                                     className="w-[200px] h-[280px] rounded-lg shadow-lg"
                                     src={item.poster}
@@ -141,29 +143,29 @@ const Kids = ({limit,isHomepage }) => {
                       </div>
                     ) :  <>
                     
-                    <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-[30px]">
+                    <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:max-xl:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-[30px]">
                             {Kids.slice(0, limit || Kids.length).map((Kids, i) => (
-                                <li key={i} className="self-start">
+                                <li key={i} className=" self-start">
                                     <button onClick={()=>{
                                       navigate(`/voting/${Kids._id}`)
-                                    }} className=' cursor-pointer w-full'> 
+                                    }} className='  cursor-pointer w-full'> 
                                         <img
-                                            className="  max-sm:w-[169px] max-sm:h-[248px] max-sm:object-cover   w-full h-[200px]  object-cover   rounded-lg shadow-xl"
+                                            className="max-sm:w-[169px] max-sm:h-[224px] max-sm:object-cover w-[189px] h-[259px]  object-cover   rounded-lg shadow-xl"
                                             src={Kids.poster}
                                             alt="Kids poster"
                                         />
-                                        <div >{formatRatings( Kids.rating)}</div>
+                                        <div className=' max-sm:w-[140px]'>{formatRatings( Kids.rating)}</div>
                                     </button>
-                                    <div className="max-sm:w-[169px] flex flex-col gap-1 mt-1 sm:mt-[-10px]">
-                                        <div className="font-[Mypoppins] font-[700] text-[#153F29] max-sm:w-[169px] sm:text-base tracking-wide">
+                                    <div className="max-sm:w-[140px] flex flex-col max-sm:mt-[-20px] gap-1 mt-[-20px]">
+                                        <div className="font-[Mypoppins] font-[700] text-[#153F29] max-sm:w-[140px] sm:text-base tracking-wide">
                                             {Kids.title}
                                         </div>
               
-                                        <div className="text-[#153F29B2] font-[500] max-sm:w-[169px] text-xs sm:text-sm">
+                                        <div className="text-[#153F29B2] font-[500] max-sm:w-[140px] text-xs sm:text-sm">
                                             {Kids.year} • {formatVotes(Kids.votes)} + votes
                                         </div>
                                     </div>
-                                    <div className="flex flex-wrap max-sm:w-[169px]  gap-1 sm:gap-2 mt-1 sm:mt-2">
+                                    <div className="flex flex-wrap max-sm:w-[140px]   gap-1 sm:gap-2 mt-1 sm:mt-2">
                                         {/* Display each genre as a separate word */}
                                         {Kids.genre.split(",").map((word, index) => (
                                             <span

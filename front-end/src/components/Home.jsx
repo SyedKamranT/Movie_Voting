@@ -7,6 +7,8 @@ import Series from './Series';
 import Kids from './Kids';
 import Footer from './Footer';
 import { RotatingLines } from 'react-loader-spinner'; // Import your loader
+import { useNavigate } from 'react-router-dom';
+
 
 const Home = () => {
   const [contentAll, setcontentAll] = useState([]);
@@ -15,6 +17,8 @@ const Home = () => {
   const [error, setError] = useState("");
   const [isHomepage, setisHomepage] = useState(false)
   const [loading, setLoading] = useState(true); // Loader state
+  const navigate = useNavigate(); 
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,7 +80,9 @@ const Home = () => {
             {filteredContent.length > 0 ? (
               filteredContent.map((item, index) => (
                 <li key={index} className="w-[200px]">
-                  <button className=' cursor-pointer'>
+                  <button onClick={()=>{
+                                                navigate(`voting/${item._id}`)
+                                            }} className=' cursor-pointer'>
                     <img
                       className="w-[200px] h-[280px] rounded-lg shadow-lg"
                       src={item.poster}
