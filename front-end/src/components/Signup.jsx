@@ -6,12 +6,14 @@ import apple from '../images/apple.png'
 import '../../src/App.css'
 import axios from 'axios'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Signup = ({ setIsAuthenticated }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+ const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -79,6 +81,9 @@ const Signup = ({ setIsAuthenticated }) => {
           <img src={facebook} alt="Facebook" className="h-5" />
           <span className="text-gray-700 font-medium">Sign in with Facebook</span>
         </button>
+      </div>
+      <div className='mt-5'>
+        <p className=" font-[Mypoppins] text-white/90 text-center">Already have an account? <a className=' text-[#00AB77]' href={'/login'}>Sign In</a> here </p>
       </div>
     </div>
   </div>
