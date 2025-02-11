@@ -1,45 +1,46 @@
-import React, { useState } from 'react'
-import {useEffect} from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
-import { RotatingLines } from 'react-loader-spinner'
-import Navbar from './Navbar';
+import { RotatingLines } from 'react-loader-spinner';
 
-
-const Kids = ({limit,isHomepage , isAuthenticated ,setIsAuthenticated}) => {
-  const [Kids, setKids] = useState([]);
-  const [error, setError] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
-   const [ homepage, setisHomepage] = useState(false)
-   const [showPopup, setShowPopup] = useState(false); // Popup state
-       const [selectedMovieId, setSelectedMovieId] = useState(null); // Store selected movie ID
-  
-  
- const [loading, setLoading] = useState(true);
-  
-  const navigate = useNavigate(); 
-  
+const Kids = ({ limit, isHomepage }) => {
+    const [kids, setKids] = useState([]);
+    const [error, setError] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [showPopup, setShowPopup] = useState(false);
+    const [selectedMovieId, setSelectedMovieId] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsAuthenticated(!!token);
       const fetchKids = async () => {
         setLoading(true)
           try {
-              const response = await axios.get("https://movie-voting-u7oh.onrender.com/kids");
-              setKids(response.data);
-          } catch (err) {
-              setError("Failed to fetch Kids. Maybe your token expired.");
-          }
-          finally{
-            setLoading(false)
-          }
-      };
+              const response = await axios.get("https://movie-voting-u7oh.onrender.com/kids", {
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            });
+            setKids(Array.isArray(response.data) ? response.data : []);
+        } catch (err) {
+            setError("Failed to fetch movies. Maybe your token expired.");
+            setKids([]);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-      fetchKids();
-  }, []);
+    fetchKids();
+}, []);
 
-  const filteredContent = Kids.filter(item =>
-    item.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+const filteredContent = Array.isArray(kids) ? kids.filter(item =>
+    item?.title?.toLowerCase().includes(searchTerm.toLowerCase())
+) : [];
   // Function to format votes
   const formatVotes = (votes) => {
       if (votes >= 1000000) return (votes / 1000000).toFixed(1) + "M";
@@ -79,12 +80,16 @@ const Kids = ({limit,isHomepage , isAuthenticated ,setIsAuthenticated}) => {
     }
 }
 const handleMovieClick = (movieId) => {
-  if (isAuthenticated) {
-      navigate(`/voting/${movieId}`);
-  } else {
-      setSelectedMovieId(movieId);
-      setShowPopup(true);
-  }
+    const token = localStorage.getItem("token");
+
+    if (token) {
+        setIsAuthenticated(true);
+        navigate(`/voting/${movieId}`);
+    } else {
+        setIsAuthenticated(false);
+        setSelectedMovieId(movieId);
+        setShowPopup(true);
+    }
 };
 
 const handleOk = () => {
@@ -162,7 +167,7 @@ const handleCancel = () => {
                         </div>
                     
                     <ul className="max-sm:gap-[10px] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:max-xl:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-[30px]">
-                            {Kids.slice(0, limit || Kids.length).map((Kids, i) => (
+                            {kids.slice(0, limit || kids.length).map((Kids, i) => (
                                 <li key={i} className=" self-start">
                                     <button onClick={() => handleMovieClick(Kids._id)} className='  cursor-pointer w-full'> 
                                         <img
