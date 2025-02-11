@@ -7,21 +7,24 @@ import { useNavigate } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner';
 import { io } from 'socket.io-client';
 import VotingPopup from './VotingPopup';
+import VideoPopup from './Youtube';
 
 const Voting = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [contentAll, setcontentAll] = useState([]);
   const [error, setError] = useState("");
-  const [socket] = useState(() => io('http://127.0.0.1:8889'));
+  const [socket] = useState(() => io('https://movie-voting-u7oh.onrender.com'));
   const [isVotingOpen, setIsVotingOpen] = useState(false);
+  const [isTrailerOpen, setIsTrailerOpen] = useState(false);
+  const [copied, setCopied] = useState(false); //newline
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const moviesRes = await axios.get("http://127.0.0.1:8889/movies");
-        const seriesRes = await axios.get("http://127.0.0.1:8889/series");
-        const kidsRes = await axios.get("http://127.0.0.1:8889/kids");
+        const moviesRes = await axios.get("https://movie-voting-u7oh.onrender.com/movies");
+        const seriesRes = await axios.get("https://movie-voting-u7oh.onrender.com/series");
+        const kidsRes = await axios.get("https://movie-voting-u7oh.onrender.com/kids");
 
         const combinedData = [
           ...moviesRes.data.map(item => ({ ...item, category: "Movie" })),
@@ -38,7 +41,16 @@ const Voting = () => {
     fetchData();
   }, []);
 
-
+  function copy() {
+    const el = document.createElement("input");
+    el.value = window.location.href;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
 
   const mainItem = contentAll.filter((item) => item._id === params.id);
   const suggestions = (currentItem) => {
@@ -83,15 +95,8 @@ const Voting = () => {
   }
 
   const handleTrailer = (item) => {
-    console.log(item.trailer)
-
-
-    return (
-      <div className=' w-full'>
-        <video src={item.trailer} controls></video>
-      </div>
-    )
-  }
+    setIsTrailerOpen(true);
+  };
 
 
   return (
@@ -151,7 +156,7 @@ const Voting = () => {
                         <div className='max-sm:gap-1.5 flex flex-col gap-2'>
                           <div className='flex justify-between items-center'>
                             <div className='md:max-lg:text-[34px] md:max-lg:leading-[40px] max-sm:text-3xl max-sm:leading-[36px] text-[48px] font-[600] leading-[72px]'>{item.title}</div>
-                            <button className='cursor-pointer'><FaShareAlt className='md:max-lg:text-xl max-sm:text-2xl text-3xl' /></button>
+                            <button className='cursor-pointer ' onClick={copy}>{!copied ? "" : <p className='mb-3 font-[Mypoppins] font-medium transition-opacity duration-500 opacity-100 '>Copied!</p>}<FaShareAlt className='md:max-lg:text-xl max-sm:text-2xl text-3xl' /> </button>
                           </div>
                           <div className='md:max-lg:text-[18px] max-sm:text-[16px]  text-[#153F29B2] text-[20px]'>{item.year} . Directed By {item.director}</div>
                         </div>
@@ -226,8 +231,8 @@ const Voting = () => {
 
                               <div><img className='w-[50px] rounded-[5px] ' src={casteImg} alt="" /></div>
                               <div>
-                                <div className='text-[16px] text-[#153F29]  font-[600] max-sm:leading-[18px] leading-[24px]'>{reviewitem.user}</div>
-                                <p className=' text-[14px] text-[#153F29] font-[400] max-sm:leading-[18px] leading-[24px]'>{reviewitem.comment}</p>
+                                <div className='text-[16px]  items-center flex text-[#153F29]  font-[600] max-sm:leading-[18px] leading-[24px]'>{reviewitem.user} <span className='ml-2 flex items-center' >  <FaStar className='text-[#4CAF50]' /><p className='pl-1 leading-1'> {reviewitem.rating}</p></span></div>
+                                <p className=' text-[14px] text-[#153F29] font-[400] max-sm:leading-[18px] leading-[24px]'>{reviewitem.comment}</p> 
                               </div>
                             </div>
                           )
@@ -324,6 +329,12 @@ const Voting = () => {
             )
           );
         }}
+      />
+
+      <VideoPopup
+        videoUrl={mainItem[0]?.trailer}
+        isOpen={isTrailerOpen}
+        onClose={() => setIsTrailerOpen(false)}
       />
     </div>
   )

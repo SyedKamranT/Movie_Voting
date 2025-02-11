@@ -1,31 +1,51 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const VotingPopup = ({ isOpen, onClose, movieId, socket, onVoteSubmit }) => {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState('');
+  const [submitStatus, setSubmitStatus] = useState('');
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Emit vote data to socket
-    socket.emit('submit-vote', {
-      movieId,
-      rating,
-      comment
-    });
+    try {
+      // Get token from localStorage
+      const token = localStorage.getItem('token');
 
-    // Call the onVoteSubmit callback
-    onVoteSubmit({
-      rating,
-      comment
-    });
+      // Submit vote via HTTP POST
+      const response = await axios.post('https://movie-voting-u7oh.onrender.com/api/submit-vote', {
+        movieId,
+        rating,
+        comment
+      });
 
-    // Reset form and close popup
-    setRating(5);
-    setComment('');
-    onClose();
+      if (response.data.success) {
+        // Optionally emit socket event for real-time updates
+        socket.emit('vote_update', {
+          movieId,
+          rating,
+          comment
+        });
+
+        // Call parent component's vote submit handler
+        onVoteSubmit({
+          rating,
+          comment
+        });
+
+        // Reset and close
+        setRating(5);
+        setComment('');
+        onClose();
+      } else {
+        setSubmitStatus(response.data.message);
+      }
+    } catch (error) {
+      setSubmitStatus(error.response?.data?.message || 'Failed to submit vote');
+    }
   };
 
   return (
@@ -40,6 +60,10 @@ const VotingPopup = ({ isOpen, onClose, movieId, socket, onVoteSubmit }) => {
             ✕
           </button>
         </div>
+
+        {submitStatus && (
+          <div className="mb-4 text-red-500">{submitStatus}</div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -81,4 +105,4 @@ const VotingPopup = ({ isOpen, onClose, movieId, socket, onVoteSubmit }) => {
   );
 };
 
-export default VotingPopup;
+export default VotingPopup; 
