@@ -5,11 +5,13 @@ import { RotatingLines } from 'react-loader-spinner'
 import Navbar from './Navbar';
 
 
-const Series = ({ limit, isHomepage}) => {
+const Series = ({ limit, isHomepage, isAuthenticated ,setIsAuthenticated}) => {
     const [series, setSeries] = useState([]);
     const [error, setError] = useState("");
     const [ homepage, setisHomepage] = useState(false)
     const [searchTerm, setSearchTerm] = useState("");
+    const [showPopup, setShowPopup] = useState(false); // Popup state
+        const [selectedMovieId, setSelectedMovieId] = useState(null); // Store selected movie ID
 
     
     
@@ -75,7 +77,23 @@ const Series = ({ limit, isHomepage}) => {
             )
         }
     }
+    const handleMovieClick = (movieId) => {
+        if (isAuthenticated) {
+            navigate(`/voting/${movieId}`);
+        } else {
+            setSelectedMovieId(movieId);
+            setShowPopup(true);
+        }
+    };
 
+    const handleOk = () => {
+        navigate("/login");
+        setShowPopup(false);
+    };
+
+    const handleCancel = () => {
+        setShowPopup(false);
+    };
    
     return (
         <div>
@@ -93,8 +111,40 @@ const Series = ({ limit, isHomepage}) => {
                                      ariaLabel="rotating-lines-loading"
                                  />
                              </div>
-                         ) : ( <div className="m-3 mt-[50px] sm:mt-[50px] font-[Mypoppins]">
-                            <div className=" text-[#153f29]  max-sm:mt-[80px] flex items-center justify-between mb-[30px]">
+                         ) : ( <div className="m-2 mt-[50px] sm:mt-[50px] font-[Mypoppins]">
+                           
+                
+                            {error && <p style={{ color: "red" }}>{error}</p>}
+                            {searchTerm ? (
+                        // Show filtered search results if there is a search term
+                        <div className="md:h-full  h-screen">
+                          <h2 className="text-[#153f29] text-2xl  mb-4 max-sm:text-[16px] uppercase  sm:text-[24px] font-custom text-[24px] font-extrabold">Search Results</h2>
+                          <ul className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3  lg:max-xl:gap-1 lg:max-xl:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-[30px]">
+                            {filteredContent.length > 0 ? (
+                              filteredContent.map((item, index) => (
+                                <li key={index} className="max-sm:w-[140px] ">
+                                  <button onClick={() => handleMovieClick(item._id)} className=' cursor-pointer'>
+                                    <img
+                                      className="max-sm:w-[140px] max-sm:h-[200px] max-sm:object-cover w-[189px] h-[259px]  object-cover   rounded-lg shadow-xl"
+                                      src={item.poster}
+                                      alt={item.title}
+                                    />
+                                    <div className="mt-2 max-sm:w-[140px]  w-[189px] text-center font-semibold">
+                                      {item.title} 
+                                    </div>
+                                    <div className="max-sm:w-[140px]  w-[189px]  text-sm text-gray-500 text-center">
+                                      {item.year} • {item.rating} ★ Ratings
+                                    </div>
+                                  </button>
+                                </li>
+                              ))
+                            ) : (
+                              <p>No results found.</p>
+                            )}
+                          </ul>
+                        </div>
+                      ) :<>
+                       <div className="  text-[#153f29]  max-sm:mt-[80px] flex items-center justify-between mb-[30px]">
                                 <div className=" max-sm:text-[16px] sm:text-[24px] font-custom text-[24px] font-extrabold">
                                     TOP RATED SERIES
                                 </div>
@@ -106,43 +156,10 @@ const Series = ({ limit, isHomepage}) => {
                                         VIEW ALL
                                     </button>
                                 )}
-                            </div>
-                
-                            {error && <p style={{ color: "red" }}>{error}</p>}
-                            {searchTerm ? (
-                        // Show filtered search results if there is a search term
-                        <div className="m-4 h-screen">
-                          <h2 className="text-2xl font-bold mb-4">Search Results</h2>
-                          <ul className="flex flex-wrap gap-6">
-                            {filteredContent.length > 0 ? (
-                              filteredContent.map((item, index) => (
-                                <li key={index} className="w-[200px]">
-                                  <button onClick={()=>{
-                                                navigate(`voting/${item._id}`)
-                                            }} className=' cursor-pointer'>
-                                    <img
-                                      className="w-[200px] h-[280px] rounded-lg shadow-lg"
-                                      src={item.poster}
-                                      alt={item.title}
-                                    />
-                                    <div className="mt-2 text-center font-semibold">
-                                      {item.title} ({item.category})
-                                    </div>
-                                    <div className="text-sm text-gray-500 text-center">
-                                      {item.year} • {item.rating} ★ Ratings
-                                    </div>
-                                  </button>
-                                </li>
-                              ))
-                            ) : (
-                              <p>No results found.</p>
-                            )}
-                          </ul>
-                        </div>
-                      ) :<><ul className="max-sm:gap-[40px] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:max-xl:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-[30px]">
+                            </div><ul className="max-sm:gap-[10px] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:max-xl:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-[30px]">
                       {series.slice(0, limit || series.length).map((item, i) => ( 
                           <li key={i} className="self-start">
-                              <button  onClick={() => navigate(`/voting/${item._id}`)} className=' cursor-pointer'>
+                              <button onClick={() => handleMovieClick(item._id)} className=' cursor-pointer'>
                                   <img
                                       className="max-sm:w-[169px] max-sm:h-[224px] max-sm:object-cover w-[189px] h-[259px]  object-cover   rounded-lg shadow-xl"
                                       src={item.poster}
@@ -178,6 +195,18 @@ const Series = ({ limit, isHomepage}) => {
                 
                             
                         </div>)}
+                        {/* Popup Modal */}
+             {showPopup && (
+                <div className=" font-[Mypoppins] backdrop-blur-[2px] fixed  inset-0 z-10 flex items-center justify-center bg-black/50">
+                    <div className="bg-white max-sm:w-[320px] max-sm:h-[200px] h-[250px] w-[380px] gap-2 flex flex-col justify-center items-center p-6 rounded-lg shadow-lg text-center">
+                        <p className="md:text-[22px] text-lg uppercase font-semibold mb-4">Login to continue</p>
+                        <div className="flex justify-center gap-4">
+                            <button onClick={handleOk} className="bg-green-500 h-[48px]  w-[108px] cursor-pointer text-white px-4 py-2 rounded hover:bg-green-600">OK</button>
+                            <button onClick={handleCancel} className="bg-red-500 h-[48px] w-[108px] cursor-pointer text-white px-4 py-2 rounded hover:bg-red-600">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            )}
        
         </div>
     );

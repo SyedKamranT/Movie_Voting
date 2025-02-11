@@ -10,7 +10,7 @@ import { RotatingLines } from 'react-loader-spinner'; // Import your loader
 import { useNavigate } from 'react-router-dom';
 
 
-const Home = () => {
+const Home = ({isAuthenticated,setIsAuthenticated}) => {
   const [contentAll, setcontentAll] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
  
@@ -74,24 +74,24 @@ const Home = () => {
         </div>
       ) : searchTerm ? (
         // Show filtered search results if there is a search term
-        <div className="m-4 ">
-          <h2 className="text-2xl font-bold mb-4">Search Results</h2>
-          <ul className="flex flex-wrap gap-6">
+        <div className="m-2 md:my-[50px] max-sm:mt-[80px] h-full ">
+          <h2 className="text-[#153f29] text-2xl  mb-4 max-sm:text-[16px] uppercase  sm:text-[24px] font-custom text-[24px] font-extrabold">Search Results</h2>
+          <ul className="max-sm:gap-[20px]  grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:max-xl:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-[30px]">
             {filteredContent.length > 0 ? (
               filteredContent.map((item, index) => (
-                <li key={index} className="w-[200px]">
+                <li key={index} className="max-sm:w-[140px] ">
                   <button onClick={()=>{
                                                 navigate(`voting/${item._id}`)
                                             }} className=' cursor-pointer'>
                     <img
-                      className="w-[200px] h-[280px] rounded-lg shadow-lg"
+                      className="max-sm:w-[140px] max-sm:object-cover w-[189px] h-[259px]  object-cover   rounded-lg shadow-xl"
                       src={item.poster}
                       alt={item.title}
                     />
-                    <div className="mt-2 text-center font-semibold">
+                    <div className="mt-2 max-sm:w-[140px]  w-[189px] text-center font-semibold">
                       {item.title} ({item.category})
                     </div>
-                    <div className="text-sm text-gray-500 text-center">
+                    <div className=" max-sm:w-[140px]  w-[189px]  text-sm text-gray-500 text-center">
                       {item.year} • {item.rating} ★ Ratings
                     </div>
                   </button>
@@ -105,7 +105,7 @@ const Home = () => {
       ) : (
         <>
           {/* Default Sections if No Search */}
-          <Movies limit={6} isHomepage = {true}  />
+          <Movies limit={6} isHomepage = {true}   />
           <Series limit={6}  isHomepage = {true} />
           <Kids limit={6}  isHomepage = {true} />
           <Footer />

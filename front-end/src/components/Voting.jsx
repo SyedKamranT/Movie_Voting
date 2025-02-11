@@ -8,8 +8,9 @@ import { RotatingLines } from 'react-loader-spinner';
 import { io } from 'socket.io-client';
 import VotingPopup from './VotingPopup';
 import VideoPopup from './Youtube';
+import Navbar from './Navbar';
 
-const Voting = () => {
+const Voting = ( {isAuthenticated , setIsAuthenticated}) => {
   const params = useParams();
   const navigate = useNavigate();
   const [contentAll, setcontentAll] = useState([]);
@@ -98,10 +99,24 @@ const Voting = () => {
     setIsTrailerOpen(true);
   };
 
+  if(!isAuthenticated){
+    return (
+      <>
+     
+      <div className= "flex justify-between items-center h-screen ">
+         
+        <h1 className='max-sm:text-[16px] max-lg:text-[30px] m-auto font-[Mypoppins] font-bold text-[40px] '>YOU MUST BE LOGGED IN TO SEE THIS PAGE</h1>
+      </div>
+      </>
+    )
+  }
 
   return (
     <div>
+    
+      
       <div className='md:max-lg:mx-[50px] mx-[120px] mt-[20px] max-md:m-2 font-[Mypoppins]'>
+      
         {mainItem.length === 0 ? (
           <div className=' flex justify-center items-center h-screen'>
             <RotatingLines className=" "
@@ -127,13 +142,13 @@ const Voting = () => {
                 <div className='flex max-md:flex-wrap gap-[20px]'>
                   {/* Left part */}
                   <div className=' flex flex-col gap-[20px] bg- max-sm:w-full  max-md:w-full'>
-                    <img className=' min-w-[350px] max-w-[350px] h-[434px] rounded-[9px] object-cover max-sm:self-center' src={item.poster} alt={item.title} />
+                    <img className='max-sm:min-w-[200px] md:max-lg:min-w-[200px] min-w-[350px] max-w-[350px] h-[434px] rounded-[9px] object-cover max-sm:self-center' src={item.poster} alt={item.title} />
                     {/* ⭐ Rating Display */}
-                    <div className='lg:gap-2 md:max-lg:gap-2 min-md::w-full flex justify-between items-center bg-[#153F29] text-white p-[20px] rounded-[9px]  h-[106px]'>
+                    <div className='lg:gap-2 md:max-lg:gap- min-md::w-full flex justify-between items-center bg-[#153F29] text-white p-[20px] rounded-[9px]  h-[106px]'>
                       {/* left rating */}
                       <div className=' flex flex-col gap-2 items-start'>
                         <p className='min-md:text-[16px] text-[14px] text-white/70 font-[600]'>Ratings</p>
-                        <div className='lg:max-xl:gap-1.5  md:max-lg:gap-1 flex items-center gap-1'>
+                        <div className='lg:max-xl:gap-1.5  md:max-lg:gap- flex items-center gap-1'>
                           {[1, 2, 3, 4, 5].map((star) => (
                             <FaStar
                               key={star}
@@ -151,18 +166,18 @@ const Voting = () => {
                   </div>
                   {/* Right Part */}
                   <div className=' flex flex-col gap-[20px] max-md:w-full'>
-                    <div className='rightdiv md:max-lg:p-[20px] max-sm:h-full max-sm:p-[20px] flex flex-col p-[30px] min-h-[434px] justify-between items-stretch bg-white rounded-[9px]  w-full'>
-                      <div className='md:max-lg:h-full md:max-lg:flex md:max-lg:flex-col md:max-lg:justify-between '>
-                        <div className='max-sm:gap-1.5 flex flex-col gap-2'>
+                    <div className='rightdiv md:max-lg:p-[20px] max-sm:h-full max-sm:p-[20px] flex flex-col p-[30px] h-[434px] justify-between items-stretch bg-white rounded-[9px]  w-full'>
+                      <div className=' md:max-lg:h-full md:max-lg:flex md:max-lg:flex-col md:max-lg:justify-between md:max-lg:gap-0  flex justify-between flex-col '>
+                        <div className='max-sm:gap-1.5 flex flex-col gap-2 lg:max-xl:gap-0'>
                           <div className='flex justify-between items-center'>
-                            <div className='md:max-lg:text-[34px] md:max-lg:leading-[40px] max-sm:text-3xl max-sm:leading-[36px] text-[48px] font-[600] leading-[72px]'>{item.title}</div>
+                            <div className='lg:max-xl:text-[36px] md:max-lg:text-[34px] md:max-lg:leading-[40px] max-sm:text-3xl max-sm:leading-[36px] text-[48px] font-[600] leading-[72px]'>{item.title}</div>
                             <button className='cursor-pointer ' onClick={copy}>{!copied ? "" : <p className='mb-3 font-[Mypoppins] font-medium transition-opacity duration-500 opacity-100 '>Copied!</p>}<FaShareAlt className='md:max-lg:text-xl max-sm:text-2xl text-3xl' /> </button>
                           </div>
-                          <div className='md:max-lg:text-[18px] max-sm:text-[16px]  text-[#153F29B2] text-[20px]'>{item.year} . Directed By {item.director}</div>
+                          <div className='lg:max-xl:text-[16px] md:max-lg:text-[16px] max-sm:text-[16px]  text-[#153F29B2] text-[20px]'>{item.year} . Directed By {item.director}</div>
                         </div>
 
                         {/* Genre */}
-                        <div className='md:max-lg:mt-[20px] md:max-lg:text-[12px] max-sm:mt-[18px] max-sm:text-[12px] flex mt-[24px] gap-[7px] text-[14px] font-[600]'>
+                        <div className='lg:max-xl:mt-[16px] md:max-lg:mt-[20px] md:max-lg:text-[12px] max-sm:mt-[18px] max-sm:text-[12px] flex mt-[24px] gap-[7px] text-[14px] font-[600]'>
                           {item.genre?.split(",").map((word, index) => (
                             <span key={index} className="border-[#4CAF50] border-1 px-[9px] py-[6px] rounded">
                               {word.trim()}
@@ -172,8 +187,8 @@ const Voting = () => {
 
                         {/* Storyline */}
                         <div>
-                          <p className=' md:max-lg:text-[14px]  max-sm:text-[14px] max-sm:mt-[18px]  text-[#153F29B2] mt-[24px] text-[16px] font-[700] tracking-[1.5px]'>Storyline</p>
-                          <div className=' lg:max-xl:w-full md:max-lg:text-[16px] md:max-lg:w-full max-sm:text-[15px] max-sm:w-full  text-[17px] font-[400] leading-[20px] mt-[10px] w-2/3 text-justify'>{item.storyline}</div>
+                          <p className='lg:max-xl:mt-[14px] md:max-lg:text-[14px]  max-sm:text-[14px] max-sm:mt-[18px]  text-[#153F29B2] mt-[24px] text-[16px] font-[700] tracking-[1.5px]'>Storyline</p>
+                          <div className=' lg:max-xl:mt-[2px] lg:max-xl:w-full md:max-lg:text-[14px] md:max-lg:w-full max-sm:text-[15px] max-sm:w-full  text-[17px] font-[400] leading-[20px] mt-[10px] w-2/3 text-justify'>{item.storyline}</div>
                         </div>
 
                         {/* Line */}
@@ -182,14 +197,14 @@ const Voting = () => {
 
 
                         {/* Vote and Play Buttons */}
-                        <div className='flex justify-start items-center gap-2 mt-4'>
+                        <div className='flex justify-start items-center gap-2 '>
                           <button
                             onClick={() => setIsVotingOpen(true)}
-                            className='md:max-lg:px-[18px] max-sm:px-[18px] max-sm:py-[10px] max-sm:text-[12px] flex justify-center items-center gap-2 bg-[#81E687] text-[#153F29] px-[22px] py-[13px] rounded-[9px] text-[14px] font-[700] tracking-[2px] max-sm:tracking-[1px] cursor-pointer'
+                            className='lg:max-xl:py-[13px] lg:max-xl:px-[14px] md:max-lg:px-[18px] md:max-lg:gap-1 md:max-lg:py-[8px] max-sm:px-[18px] max-sm:py-[10px] max-sm:text-[12px] flex justify-center items-center gap-2 bg-[#81E687] text-[#153F29] px-[22px] py-[13px] rounded-[9px] text-[14px] font-[700] tracking-[2px] max-sm:tracking-[1px] cursor-pointer'
                           >
                             <FaStar /> VOTE MOVIE
                           </button>
-                          <button onClick={() => handleTrailer(item)} className='md:max-lg:px-[18px] max-sm:px-[18px] max-sm:py-[10px] max-sm:text-[12px] flex justify-center items-center gap-2 border-2 border-[#153F29] text-[#153F29] px-[22px] py-[13px] rounded-[9px] text-[14px] font-[700] tracking-[2px] max-sm:tracking-[1px] cursor-pointer'>
+                          <button onClick={() => handleTrailer(item)} className='lg:max-xl:py-[13px] lg:max-xl:px-[14px] md:max-lg:px-[18px] md:max-lg:py-2 md:max-lg:gap-1 max-sm:px-[18px] max-sm:py-[10px] max-sm:text-[12px] flex justify-center items-center gap-2 border-2 border-[#153F29] text-[#153F29] px-[22px] py-[13px] rounded-[9px] text-[14px] font-[700] tracking-[2px] max-sm:tracking-[1px] cursor-pointer'>
                             <FaPlay /> VIEW TRAILER
                           </button>
                         </div>
@@ -202,7 +217,7 @@ const Voting = () => {
                       {/* heading */}
                       <p className=' max-sm:text-[14px] text-[#153F29B2]  text-[16px] font-[700] tracking-[1.5px]'>Cast</p>
                       {/* Cast List */}
-                      <div className='md:max-lg:grid-cols-2 md:max-lg:gap-[25px] max-sm:grid-cols-2 max-sm:gap-[20px] mt-[30px] gap-[30px] grid grid-cols-3'>
+                      <div className=' md:max-lg:gap-[25px]  max-sm:gap-[20px] mt-[30px] gap-[30px] justify-between items-center flex flex-wrap'>
                         {item.cast.map((castitem, index) => {
                           return (
 
@@ -227,9 +242,9 @@ const Voting = () => {
                         {item.reviews.map((reviewitem, index) => {
 
                           return (
-                            <div key={index} className=' flex gap-3'>
+                            <div key={index} className=' flex gap-[20px]'>
 
-                              <div><img className='w-[50px] rounded-[5px] ' src={casteImg} alt="" /></div>
+                              <div><img className='min-w-[50px] h-[50px] rounded-[5px] ' src={casteImg} alt="" /></div>
                               <div>
                                 <div className='text-[16px]  items-center flex text-[#153F29]  font-[600] max-sm:leading-[18px] leading-[24px]'>{reviewitem.user} <span className='ml-2 flex items-center' >  <FaStar className='text-[#4CAF50]' /><p className='pl-1 leading-1'> {reviewitem.rating}</p></span></div>
                                 <p className=' text-[14px] text-[#153F29] font-[400] max-sm:leading-[18px] leading-[24px]'>{reviewitem.comment}</p> 
