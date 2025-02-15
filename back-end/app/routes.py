@@ -69,7 +69,6 @@ def login():
 
 # Fetch Movies Route (GET)
 @main_routes.route('/movies', methods=['GET'])
-@jwt_required()
 def get_movies():
     # Fetch movies from the movies collection
     movies = list(db.movies.find({}))  # Fetch all movies with all fields, including _id
@@ -85,7 +84,6 @@ def get_movies():
 
 
 @main_routes.route('/kids', methods=['GET'])
-@jwt_required()
 def get_kid_shows():
     # Fetch kid shows from the kids collection
     kids_show = list(db.kids_show.find({}))
@@ -99,7 +97,6 @@ def get_kid_shows():
         return jsonify({"message": "No kids show found"}), 404
     
 @main_routes.route('/series', methods=['GET'])
-@jwt_required()
 def get_webseries():
     # Fetch series from the series collection
     web_series = list(db.web_series.find({}))
