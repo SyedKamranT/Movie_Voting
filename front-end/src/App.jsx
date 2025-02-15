@@ -42,22 +42,22 @@ function App() {
     {
       path: "/login",
       element:<> {
-        <Login setIsAuthenticated={setIsAuthenticated} />
+        <Login isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
       }</>
     },
     
     {
       path: "/movies",
       element:<>
-     <Movies  isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} /></>
+     <Movies isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated}  /></>
     },
     {
       path: "/series",
-      element: <><Series   isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated}/></>
+      element: <><Series  isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated}/></>
     },
     {
       path: "/kids",
-      element:<><Kids  isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} /></>
+      element:<><Kids isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} /></>
     },
     {
       path: "/voting/:id",
