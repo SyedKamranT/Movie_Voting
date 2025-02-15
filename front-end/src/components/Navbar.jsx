@@ -140,7 +140,7 @@ const Navbar = ({ limit, homepage, searchTerm, setSearchTerm }) => {
               </button>
             ) : (
               <button
-                onClick={() => window.location.href = "https://movievotingramov.vercel.app/login"}
+                onClick={() => window.location.href = "http://localhost:5173/login"}
                 className="text-[#153F29] cursor-pointer bg-[#81E687] font-bold text-xs tracking-[1px] rounded-md px-4 py-3"
               >
                 LOGIN

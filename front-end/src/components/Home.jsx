@@ -224,9 +224,9 @@ const Home = ({isAuthenticated,setIsAuthenticated}) => {
       ) : (
         <>
           {/* Default Sections if No Search */}
-          <Movies limit={6} isHomepage = {true}   />
-          <Series limit={6}  isHomepage = {true} />
-          <Kids limit={6}  isHomepage = {true} />
+          <Movies limit={6} isHomepage = {true} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+          <Series limit={6}  isHomepage = {true} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
+          <Kids limit={6}  isHomepage = {true} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
           <Footer />
         </>
       )}
