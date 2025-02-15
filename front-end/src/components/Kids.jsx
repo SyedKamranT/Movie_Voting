@@ -230,9 +230,10 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from 'react-loader-spinner'
 import Navbar from './Navbar';
+import { useAuth } from "../AuthContext"; // Import useAuth hook
 
 
-const Kids = ({limit,isHomepage , isAuthenticated ,setIsAuthenticated}) => {
+const Kids = ({limit,isHomepage}) => {
   const [Kids, setKids] = useState([]);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -244,6 +245,7 @@ const Kids = ({limit,isHomepage , isAuthenticated ,setIsAuthenticated}) => {
  const [loading, setLoading] = useState(true);
   
   const navigate = useNavigate(); 
+  const { isAuthenticated } = useAuth();
   
 
   useEffect(() => {

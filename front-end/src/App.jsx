@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { createBrowserRouter ,RouterProvider} from "react-router-dom"
+import { useContext } from "react"; //now added
+import { useAuth } from "./AuthContext";; //now added
+import { AuthProvider } from "./AuthContext";
 import Login from "./components/Login";
 import Results from "./components/Results";
 import Voting from "./components/Voting";
@@ -13,20 +16,11 @@ import Signup from "./components/Signup";
 import "./App.css";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated } = useAuth(); // Use context instead of state
   
   
 
-  useEffect(() => {
-    // Check if the user has a valid token
-    
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuthenticated(true);
-    }
-  }, []);
-
-
+ 
 
 
   // Creating our routes
@@ -36,47 +30,48 @@ function App() {
       path: "/",
       element:<>
       
-      <Home  isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+      <Home   />
       </>
     },
     {
       path: "/login",
       element:<> {
-        <Login isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+        <Login />
       }</>
     },
     
     {
       path: "/movies",
       element:<>
-     <Movies isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated}  /></>
+     <Movies   /></>
     },
     {
       path: "/series",
-      element: <><Series  isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated}/></>
+      element: <><Series/></>
     },
     {
       path: "/kids",
-      element:<><Kids isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} /></>
+      element:<><Kids /></>
     },
     {
       path: "/voting/:id",
       element:<><Navbar   />
-      <Voting  isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated}/></>
+      <Voting /></>
     },
     {
       path: "/signup",
-      element:<> <Signup setIsAuthenticated={setIsAuthenticated} /></>
+      element:<> <Signup  /></>
     }
     
     
   ])
 
   return (
-   
+    <AuthProvider>
     <div className="bg-[#EFF2F0]">
         <RouterProvider router={router} />
     </div>
+    </AuthProvider>
 
   );
 }

@@ -226,15 +226,19 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner'
 import Navbar from './Navbar';
+import { useAuth } from "../AuthContext"; // Import useAuth hook
 
 
-const Series = ({ limit, isHomepage, isAuthenticated ,setIsAuthenticated}) => {
+const Series = ({ limit, isHomepage}) => {
     const [series, setSeries] = useState([]);
     const [error, setError] = useState("");
     const [ homepage, setisHomepage] = useState(false)
     const [searchTerm, setSearchTerm] = useState("");
     const [showPopup, setShowPopup] = useState(false); // Popup state
         const [selectedMovieId, setSelectedMovieId] = useState(null); // Store selected movie ID
+
+        const { isAuthenticated } = useAuth(); // Get authentication state from context
+        
 
     
     

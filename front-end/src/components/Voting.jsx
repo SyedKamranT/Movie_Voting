@@ -368,8 +368,9 @@ import { io } from 'socket.io-client';
 import VotingPopup from './VotingPopup';
 import VideoPopup from './Youtube';
 import Navbar from './Navbar';
+import { useAuth } from "../AuthContext"; 
 
-const Voting = ( {isAuthenticated , setIsAuthenticated}) => {
+const Voting = ( ) => {
   const params = useParams();
   const navigate = useNavigate();
   const [contentAll, setcontentAll] = useState([]);
@@ -378,6 +379,8 @@ const Voting = ( {isAuthenticated , setIsAuthenticated}) => {
   const [isVotingOpen, setIsVotingOpen] = useState(false);
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   const [copied, setCopied] = useState(false); //newline
+
+   const { isAuthenticated } = useAuth(); 
 
   useEffect(() => {
     const fetchData = async () => {
