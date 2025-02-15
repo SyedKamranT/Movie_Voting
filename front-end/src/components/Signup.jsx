@@ -27,7 +27,7 @@ const Signup = ({ setIsAuthenticated }) => {
       // Save token in localStorage
 
       setMessage(response.data.message);
-      window.location.href = "http://localhost:5173/login"
+      window.location.href = "https://movievotingramov.vercel.app/login"
       setError("");
 
       // Update authentication state
