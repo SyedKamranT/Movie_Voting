@@ -69,7 +69,6 @@ def login():
 
 # Fetch Movies Route (GET)
 @main_routes.route('/movies', methods=['GET'])
-@jwt_required()
 def get_movies():
     # Fetch movies from the movies collection
     movies = list(db.movies.find({}))  # Fetch all movies with all fields, including _id
@@ -85,7 +84,6 @@ def get_movies():
 
 
 @main_routes.route('/kids', methods=['GET'])
-@jwt_required()
 def get_kid_shows():
     # Fetch kid shows from the kids collection
     kids_show = list(db.kids_show.find({}))
@@ -99,8 +97,49 @@ def get_kid_shows():
         return jsonify({"message": "No kids show found"}), 404
     
 @main_routes.route('/series', methods=['GET'])
-@jwt_required()
 def get_webseries():
+    # Fetch series from the series collection
+    web_series = list(db.web_series.find({}))
+    
+    for web in web_series:
+        web['_id'] = str(web['_id'])
+    
+    if web_series:
+        return jsonify(web_series), 200
+    else:
+        return jsonify({"message": "No web series found"}), 404
+    
+    
+@main_routes.route('/movieshome', methods=['GET'])
+def get_movies_home():
+    # Fetch movies from the movies collection
+    movies = list(db.movies.find({}))  # Fetch all movies with all fields, including _id
+    
+    # Convert ObjectId to string for JSON serialization
+    for movie in movies:
+        movie['_id'] = str(movie['_id'])  # Convert ObjectId to string
+    
+    if movies:
+        return jsonify(movies), 200  # Return the movies as JSON
+    else:
+        return jsonify({"message": "No movies found"}), 404
+
+
+@main_routes.route('/kidshome', methods=['GET'])
+def get_kid_shows_home():
+    # Fetch kid shows from the kids collection
+    kids_show = list(db.kids_show.find({}))
+    
+    for kid in kids_show:
+        kid['_id'] = str(kid['_id'])
+    
+    if kids_show:
+        return jsonify(kids_show), 200
+    else:
+        return jsonify({"message": "No kids show found"}), 404
+    
+@main_routes.route('/serieshome', methods=['GET'])
+def get_webseries_home():
     # Fetch series from the series collection
     web_series = list(db.web_series.find({}))
     
