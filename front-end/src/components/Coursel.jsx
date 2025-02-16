@@ -8,9 +8,9 @@ const Carousel = () => {
 
 
   const slides = [
-    { id: 1, image: corosal1, alt: "Slide 1" },
-    { id: 2, image: corosal2, alt: "Slide 2" },
-    { id: 3, image: corosal3, alt: "Slide 3" },
+    { id: 1, image: corosal1, alt: "Slide 1",category: "Movies" },
+    { id: 2, image: corosal2, alt: "Slide 2" ,category: "Series" },
+    { id: 3, image: corosal3, alt: "Slide 3",category: "Kids Shows"  },
   ];
 
   useEffect(() => {
@@ -57,12 +57,12 @@ const Carousel = () => {
               <div className="max-lg:hidden lg:max-xl:p-[16px] lg:max-xl:bottom-[30px] lg:max-xl:left-[30px] absolute p-[20px] text-[24px] tracking-[1px] flex flex-row justify-around items-center bottom-[50px] left-[50px] w-[455px] h-[120px] backdrop-blur-2xl bg-white/20 rounded-[12px] xl:w-[600px] xl:h-[140px]">
 
                 <div className=" lg:max-xl:text-[24px] lg:max-xl:[30px] font-custom leading-[29px] text-white lg:text-[28px] lg:leading-[35px]">
-                  TOP RATED <div>MOVIES OF 2025</div>
+                  TOP RATED <div><span className=" text-[#7EE084] uppercase ">{slide.category}</span> OF 2025</div>
                 </div>
 
                 <div className="ratings bg-[#7EE084] font-bold backdrop-blur-md text-center flex justify-center items-center rounded-[5px] h-[39px] w-[46px] lg:h-[50px] lg:w-[60px]">
 
-                  <div className="rating text-[24px] lg:text-[28px]">4.5</div>
+                  <div className="rating text-[24px] lg:text-[28px]">9.5</div>
                 </div>
 
               </div>

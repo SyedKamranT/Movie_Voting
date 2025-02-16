@@ -57,34 +57,32 @@ const Signup = ({ setIsAuthenticated }) => {
     <div className="relative z-10 bg-[#000000]/70 backdrop-blur-lg p-6 sm:p-8 rounded-xl shadow-2xl max-w-[90%] sm:max-w-[450px] lg:max-w-[500px] w-full">
       <div className="text-left mb-6">
         <h3 className="text-xs font-regular text-white">LET'S GET YOU STARTED</h3>
-        <h1 className="text-xl font-bold text-white ">Sign up to Get Started</h1>
+        <h1 className="text-xl font-bold text-white uppercase ">Sign up to Get Started</h1>
       </div>
       {error && <p style={{ color: "red"}}>{error}</p>}
       {message && <p style={{ color: "green" }}>{message}</p>}
       <form onSubmit={handleLogin} className="w-full flex flex-col gap-4">
         <input value={username} onChange={(e) => setUsername(e.target.value)} required className="p-2.5 border ring-1 border-white/80 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-white" type="text" placeholder="Username" />
         <input value={password} onChange={(e) => setPassword(e.target.value)} required className="p-2.5 border ring-1 border-white/80 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-white" type="password" placeholder="Enter Password" />
-        <input className="bg-[#0DBC87] tracking-[2px] text-white p-3 rounded-lg cursor-pointer hover:bg-[#00AB77] transition font-semibold" type="submit" value="GET STARTED" />
+        <input className="bg-[#0DBC87]  tracking-[2px] text-white p-3 rounded-lg cursor-pointer hover:bg-[#00AB77] transition font-semibold" type="submit" value="GET STARTED" />
       </form>
 
-      <div className="text-center mt-6 text-white/90">
-        ─────────────── Or ───────────────
-      </div>
+      <div className="max-sm: text-center mt-6 text-white/50">─────── Or ───────</div>
 
       {/* Social Sign-In Buttons */}
       <div className="btns w-full mt-6 space-y-4">
-        <button className="bg-[#FFFFFF] flex items-center justify-center gap-3 p-2 w-full rounded-lg shadow-md hover:bg-blue-100 transition">
+        <button className="bg-[#FFFFFF] cursor-pointer flex items-center justify-center gap-3 p-2 w-full rounded-lg shadow-md hover:bg-blue-100 transition">
           <img src={google} alt="Google" className="h-5" />
           <span className="text-gray-700 font-medium">Sign in with Google</span>
         </button>
-        <button className="bg-[#FFFFFF] flex items-center justify-center gap-3 p-2 w-full rounded-lg shadow-md hover:bg-blue-100 transition">
+        <button className="bg-[#FFFFFF] cursor-pointer flex items-center justify-center gap-3 p-2 w-full rounded-lg shadow-md hover:bg-blue-100 transition">
           <img src={facebook} alt="Facebook" className="h-5" />
           <span className="text-gray-700 font-medium">Sign in with Facebook</span>
         </button>
       </div>
-      <div className='mt-5'>
-        <p className=" font-[Mypoppins] text-white/90 text-center">Already have an account? <a className=' text-[#00AB77]' href={'/login'}>Sign In</a> here </p>
-      </div>
+      <div className="max-sm:text-[12px]  mt-5 text-center text-white/90">
+            Already have an account? <a className="text-[#00AB77] cursor-pointer" href="/login">Sign In</a> here.
+          </div>
     </div>
   </div>
 </div>

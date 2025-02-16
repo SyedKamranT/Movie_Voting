@@ -49,13 +49,13 @@ const VotingPopup = ({ isOpen, onClose, movieId, socket, onVoteSubmit }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-[2px] font-[Mypoppins] bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-8 max-w-md w-full">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-[#153F29]">Rate & Review</h2>
           <button 
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="cursor-pointer text-gray-500 hover:text-gray-700"
           >
             ✕
           </button>
@@ -95,7 +95,7 @@ const VotingPopup = ({ isOpen, onClose, movieId, socket, onVoteSubmit }) => {
 
           <button
             type="submit"
-            className="w-full bg-[#81E687] text-[#153F29] py-3 rounded-md font-bold tracking-wider hover:bg-[#6bc770] transition-colors"
+            className="w-full cursor-pointer bg-[#81E687] text-[#153F29] py-3 rounded-md font-bold tracking-wider hover:bg-[#6bc770] transition-colors"
           >
             SUBMIT VOTE
           </button>
