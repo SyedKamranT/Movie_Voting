@@ -59,21 +59,29 @@ const Home = () => {
           <RotatingLines visible={true} height="96" width="80" color="grey" />
         </div>
       ) : searchTerm ? (
-        <div className="m-2 md:my-[50px] max-sm:mt-[80px] h-full">
+        <div className="h-full m-2 md:my-[50px] max-sm:mt-[80px]">
           <h2 className="text-[#153f29] text-2xl mb-4 uppercase font-extrabold">Search Results</h2>
           <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             {filteredContent.length > 0 ? (
               filteredContent.map((item, index) => (
                 <li key={index} className="max-sm:w-[140px]">
-                  <button onClick={() => navigate(`voting/${item._id}`)} className='cursor-pointer'>
-                    <img className="w-[189px] h-[259px] object-cover rounded-lg shadow-xl" src={item.poster} alt={item.title} />
-                    <div className="mt-2 text-center font-semibold">{item.title} ({item.category})</div>
-                    <div className="text-sm text-gray-500 text-center">{item.year} • {item.rating} ★ Ratings</div>
-                  </button>
-                </li>
+                <button onClick={() => handleMovieClick(item._id)} className=' cursor-pointer'>
+                  <img
+                    className="max-sm:w-[140px] max-sm:h-[200px] max-sm:object-cover w-[189px] h-[259px]  object-cover   rounded-lg shadow-xl"
+                    src={item.poster}
+                    alt={item.title}
+                  />
+                  <div className="max-sm:w-[140px] mt-2   w-[189px] text-center font-semibold">
+                    {item.title} ({item.category})
+                  </div>
+                  <div className=" max-sm:w-[140px]  w-[189px]  text-sm text-gray-500 text-center">
+                    {item.year} • {item.rating} ★ Ratings
+                  </div>
+                </button>
+              </li>
               ))
             ) : (
-              <p>No results found.</p>
+              <p className=' font-[Mypoppins] font-bold'>No results found.</p>
             )}
           </ul>
         </div>

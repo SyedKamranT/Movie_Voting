@@ -20,7 +20,7 @@ const Navbar = ({ limit, homepage, searchTerm, setSearchTerm }) => {
             RAMOV
           </div>
           <button
-            className="md:hidden text-white text-2xl ml-auto"
+            className="md:hidden text-white text-2xl ml-auto outline-0"
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <FiX /> : <FiMenu />}
@@ -38,7 +38,7 @@ const Navbar = ({ limit, homepage, searchTerm, setSearchTerm }) => {
               <NavLink
                 key={item.name}
                 className={({ isActive }) =>
-                  `${isActive ? "min-md:px-3 min-md:py-2 text-[#153F29] bg-[#81E687] rounded-md" : "text-white"} font-medium tracking-[1px] text-sm px-3 py-2 md:text-base md:px-4 md:py-2`}
+                  `${isActive ? "min-md:px-3 min-md:py-2 text-[#153F29] bg-[#81E687] rounded-md" : "text-white"} outline-0 font-medium tracking-[1px] text-sm px-3 py-2 md:text-base md:px-4 md:py-2`}
                 to={item.path}
                 onClick={() => setMenuOpen(false)}
               >
@@ -59,7 +59,7 @@ const Navbar = ({ limit, homepage, searchTerm, setSearchTerm }) => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="text-white tracking-[1px] text-sm font-bold bg-transparent w-full outline-0"
                 />
-                <button>
+                <button className=" outline-0">
                   <CiSearch className="text-xl text-[#81E687]" />
                 </button>
               </div>
@@ -82,7 +82,7 @@ const Navbar = ({ limit, homepage, searchTerm, setSearchTerm }) => {
               <div className="w-full flex justify-center">
                 {isAuthenticated ? (
                   <button
-                    className="text-[#153F29] bg-[#81E687] font-bold text-xs tracking-[1px] rounded-md px-4 py-3"
+                    className="text-[#153F29] outline-0 bg-[#81E687] font-bold text-xs tracking-[1px] rounded-md px-4 py-3"
                     onClick={logout}
                   >
                     LOGOUT
@@ -90,7 +90,7 @@ const Navbar = ({ limit, homepage, searchTerm, setSearchTerm }) => {
                 ) : (
                   <button
                     onClick={() => window.location.href = "/login"}
-                    className="text-[#153F29] bg-[#81E687] font-bold text-sm tracking-[1px] cursor-pointer rounded-md px-4 py-3"
+                    className="outline-0 text-[#153F29] bg-[#81E687] font-bold text-sm tracking-[1px] cursor-pointer rounded-md px-4 py-3"
                   >
                     LOGIN
                   </button>
@@ -118,7 +118,7 @@ const Navbar = ({ limit, homepage, searchTerm, setSearchTerm }) => {
           <div>
             {isAuthenticated ? (
               <button
-                className="text-[#153F29] bg-[#81E687] font-bold text-xs tracking-[1px] cursor-pointer rounded-md px-4 py-3"
+                className="text-[#153F29] outline-0 bg-[#81E687] font-bold text-xs tracking-[1px] cursor-pointer rounded-md px-4 py-3"
                 onClick={logout}
               >
                 LOGOUT
@@ -126,7 +126,7 @@ const Navbar = ({ limit, homepage, searchTerm, setSearchTerm }) => {
             ) : (
               <button
                 onClick={() => window.location.href = "/login"}
-                className="text-[#153F29] cursor-pointer bg-[#81E687] font-bold text-xs tracking-[1px] rounded-md px-4 py-3"
+                className="text-[#153F29] outline-0 cursor-pointer bg-[#81E687] font-bold text-xs tracking-[1px] rounded-md px-4 py-3"
               >
                 LOGIN
               </button>

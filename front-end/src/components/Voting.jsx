@@ -102,9 +102,9 @@
 //   if(!isAuthenticated){
 //     return (
 //       <>
-     
+
 //       <div className= "flex justify-between items-center h-screen ">
-         
+
 //         <h1 className='max-sm:text-[16px] max-lg:text-[30px] m-auto font-[Mypoppins] font-bold text-[40px] '>YOU MUST BE LOGGED IN TO SEE THIS PAGE</h1>
 //       </div>
 //       </>
@@ -113,10 +113,10 @@
 
 //   return (
 //     <div>
-    
-      
+
+
 //       <div className='md:max-lg:mx-[50px] mx-[120px] mt-[20px] max-md:m-2 font-[Mypoppins]'>
-      
+
 //         {mainItem.length === 0 ? (
 //           <div className=' flex justify-center items-center h-screen'>
 //             <RotatingLines className=" "
@@ -368,9 +368,9 @@ import { io } from 'socket.io-client';
 import VotingPopup from './VotingPopup';
 import VideoPopup from './Youtube';
 import Navbar from './Navbar';
-import { useAuth } from "../AuthContext"; 
+import { useAuth } from "../AuthContext";
 
-const Voting = ( ) => {
+const Voting = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [contentAll, setcontentAll] = useState([]);
@@ -379,8 +379,9 @@ const Voting = ( ) => {
   const [isVotingOpen, setIsVotingOpen] = useState(false);
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   const [copied, setCopied] = useState(false); //newline
+  const [showAllReviews, setShowAllReviews] = useState(false); //for reviews
 
-   const { isAuthenticated } = useAuth(); 
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -461,24 +462,24 @@ const Voting = ( ) => {
     setIsTrailerOpen(true);
   };
 
-  if(!isAuthenticated){
+  if (!isAuthenticated) {
     return (
       <>
-     
-      <div className= "flex justify-between items-center h-screen ">
-         
-        <h1 className='max-sm:text-[16px] max-lg:text-[30px] m-auto font-[Mypoppins] font-bold text-[40px] '>YOU MUST BE LOGGED IN TO SEE THIS PAGE</h1>
-      </div>
+
+        <div className="flex justify-between items-center h-screen ">
+
+          <h1 className='max-sm:text-[16px] max-lg:text-[30px] m-auto font-[Mypoppins] font-bold text-[40px] '>YOU MUST BE LOGGED IN TO SEE THIS PAGE</h1>
+        </div>
       </>
     )
   }
 
   return (
     <div>
-    
-      
+
+
       <div className='md:max-lg:mx-[50px] mx-[120px] mt-[20px] max-md:m-2 font-[Mypoppins]'>
-      
+
         {mainItem.length === 0 ? (
           <div className=' flex justify-center items-center h-screen'>
             <RotatingLines className=" "
@@ -498,6 +499,7 @@ const Voting = ( ) => {
             console.log("Item Data:", item); // Debugging log
             const rating = item.rating ?? 0; // Default to 0 if undefined
             const starRating = Math.round(rating / 2); // Convert 10-scale to 5-star
+            const displayedReviews = showAllReviews ? item.reviews.reverse() : item.reviews.reverse().slice(0, 5);
 
             return (
               <div key={item._id}>
@@ -528,14 +530,14 @@ const Voting = ( ) => {
                   </div>
                   {/* Right Part */}
                   <div className=' flex flex-col gap-[20px] max-md:w-full'>
-                    <div className='rightdiv md:max-lg:p-[20px] max-sm:h-full max-sm:p-[20px] flex flex-col p-[30px] h-[434px] justify-between items-stretch bg-white rounded-[9px]  w-full'>
-                      <div className=' md:max-lg:h-full md:max-lg:flex md:max-lg:flex-col md:max-lg:justify-between md:max-lg:gap-0  flex justify-between flex-col '>
+                    <div className='rightdiv  md:max-lg:p-[20px] max-sm:h-full max-sm:p-[20px] flex flex-col p-[30px] h-[434px] justify-between items-stretch bg-white rounded-[9px]  w-full'>
+                      <div className=' h-full md:max-lg:h-full md:max-lg:flex md:max-lg:flex-col md:max-lg:justify-between md:max-lg:gap-0  flex justify-between flex-col '>
                         <div className='max-sm:gap-1.5 flex flex-col gap-2 lg:max-xl:gap-0'>
                           <div className='flex justify-between items-center'>
                             <div className='lg:max-xl:text-[36px] md:max-lg:text-[34px] md:max-lg:leading-[40px] max-sm:text-3xl max-sm:leading-[36px] text-[48px] font-[600] leading-[72px]'>{item.title}</div>
                             <button className='cursor-pointer ' onClick={copy}>{!copied ? "" : <p className='mb-3 font-[Mypoppins] font-medium transition-opacity duration-500 opacity-100 '>Copied!</p>}<FaShareAlt className='md:max-lg:text-xl max-sm:text-2xl text-3xl' /> </button>
                           </div>
-                          <div className='lg:max-xl:text-[16px] md:max-lg:text-[16px] max-sm:text-[16px]  text-[#153F29B2] text-[20px]'>{item.year} . Directed By {item.director}</div>
+                          <div className='lg:max-xl:text-[16px] md:max-lg:text-[16px] max-sm:text-[16px]  text-[#153F29B2] text-[20px] w-[550px] lg:max-xl:w-[350px] max-sm:w-full md:max-lg:w-[300px] h-[30px] overflow-hidden overflow-ellipsis whitespace-nowrap '>{item.year} . Directed By {item.director}</div>
                         </div>
 
                         {/* Genre */}
@@ -562,7 +564,7 @@ const Voting = ( ) => {
                         <div className='flex justify-start items-center gap-2 '>
                           <button
                             onClick={() => setIsVotingOpen(true)}
-                            className='lg:max-xl:py-[13px] lg:max-xl:px-[14px] md:max-lg:px-[18px] md:max-lg:gap-1 md:max-lg:py-[8px] max-sm:px-[18px] max-sm:py-[10px] max-sm:text-[12px] flex justify-center items-center gap-2 bg-[#81E687] text-[#153F29] px-[22px] py-[13px] rounded-[9px] text-[14px] font-[700] tracking-[2px] max-sm:tracking-[1px] cursor-pointer'
+                            className='border-[#153F29] border-2 lg:max-xl:py-[13px] lg:max-xl:px-[14px] md:max-lg:px-[18px] md:max-lg:gap-1 md:max-lg:py-[8px] max-sm:px-[18px] max-sm:py-[10px] max-sm:text-[12px] flex justify-center items-center gap-2 bg-[#81E687] text-[#153F29] px-[22px] py-[13px] rounded-[9px] text-[14px] font-[700] tracking-[2px] max-sm:tracking-[1px] cursor-pointer'
                           >
                             <FaStar /> VOTE MOVIE
                           </button>
@@ -583,7 +585,7 @@ const Voting = ( ) => {
                         {item.cast.map((castitem, index) => {
                           return (
 
-                            <div key={index} className='md:max-lg:gap-2 flex max-sm:gap-2 gap-3'>
+                            <div key={index} className='max-sm:w-full md:max-lg:gap-2 flex max-sm:gap-2 gap-3'>
                               <div><img className='w-[50px] rounded-[5px] ' src={casteImg} alt="" /></div>
                               <div>
                                 <div className=' md:max-lg:text-[14px] md:max-lg:leading-[20px] text-[#153F29] max-sm:text-[14px] max-sm:leading-[18px]  text-[16px] font-[500] leading-[24px]'>{castitem}</div>
@@ -598,10 +600,21 @@ const Voting = ( ) => {
 
                     </div>
                     {/* reviews */}
-                    <div className=' bg-white  w-full  p-7.5 rounded-[9px]'>
-                      <p className='text-[#153F29B2] max-sm:text-[14px] text-[16px] font-[700] tracking-[1.5px]'>Popular Reviews ({item.reviews.length})</p>
+                    <div className=' bg-white font-[Mypoppins]  w-full  p-7.5 rounded-[9px]'>
+                      <p className='text-[#153F29B2] max-sm:text-[14px] max-sm:gap-[15px] text-[16px] font-[700] flex justify-between tracking-[1.5px]'>
+                        <span>Popular Reviews ({displayedReviews.length})</span>
+                        {/* View All Button */}
+                       <span> {item.reviews.length > 5 && (
+                          <button
+                            onClick={() => setShowAllReviews(!showAllReviews)}
+                            className=" cursor-pointer text-[14px]  hover:underline"
+                          >
+                            {showAllReviews ? "Show Less" : "View All"}
+                          </button>
+                        )}</span>
+                      </p>
                       <div className=' mt-[30px] max-sm:gap-[20px] flex flex-col gap-[30px]' >
-                        {item.reviews.map((reviewitem, index) => {
+                        {displayedReviews.map((reviewitem, index) => {
 
                           return (
                             <div key={index} className=' flex gap-[20px]'>
@@ -609,7 +622,7 @@ const Voting = ( ) => {
                               <div><img className='min-w-[50px] h-[50px] rounded-[5px] ' src={casteImg} alt="" /></div>
                               <div>
                                 <div className='text-[16px]  items-center flex text-[#153F29]  font-[600] max-sm:leading-[18px] leading-[24px]'>{reviewitem.user} <span className='ml-2 flex items-center' >  <FaStar className='text-[#4CAF50]' /><p className='pl-1 leading-1'> {reviewitem.rating}</p></span></div>
-                                <p className=' text-[14px] text-[#153F29] font-[400] max-sm:leading-[18px] leading-[24px]'>{reviewitem.comment}</p> 
+                                <p className=' text-[14px] text-[#153F29] font-[400] max-sm:leading-[18px] leading-[24px]'>{reviewitem.comment}</p>
                               </div>
                             </div>
                           )
