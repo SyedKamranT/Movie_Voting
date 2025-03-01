@@ -1,75 +1,94 @@
-# Movie_Voting
-Movie Voting Web Application
+# Movie Voting Web Application
 
+A real-time, interactive movie voting platform with **React (Vite) + Flask + MongoDB + Socket.IO** for seamless voting and dynamic updates.
 
-Key Features
-User Authentication
+---
 
-Secure Login and Signup system using JWT (JSON Web Tokens).
-Role-based access (e.g., admin for adding movies, users for voting).
-Movie List
+## 🔹 Features
+✅ **User Authentication** with JWT (Signup, Login)  
+✅ **Role-Based Access** (Admins manage movies, users vote)  
+✅ **Movie List** with dynamic fetching from the database  
+✅ **Voting System** with real-time updates using Socket.IO  
+✅ **Live Results Page** (Bar charts & Leaderboards)  
+✅ **Responsive Design** (Desktop, Tablet, Mobile)  
 
-Display a dynamic list of movies fetched from a database.
-Each movie includes details like title, poster, genre, and description.
-Voting System
+---
 
-Users can vote for their favorite movies.
-Votes are stored in real-time in a database.
-Real-Time Updates
+## 📦 Tech Stack
 
-Using Socket.IO, votes are updated live for all connected users.
-No need to refresh the page to see results.
-Results Page
+### **Frontend:**
+- 🖥️ **React + Vite** (Fast UI Rendering)
+- 🎨 **Tailwind CSS** (Modern UI Styling)
+- 🔗 **Axios** (API Requests)
+- 🔄 **Socket.IO Client** (Real-time Voting Updates)
 
-A visual representation of the voting results (e.g., bar chart or leaderboard).
-Updates dynamically as users vote.
-Responsive Design
+### **Backend:**
+- 🚀 **Flask + Flask-SocketIO** (API & WebSockets)
+- 🔑 **JWT Authentication** (Secure User Auth)
+- 📊 **Pymongo + MongoDB** (Database for Movies & Votes)
 
-Fully functional across desktops, tablets, and smartphones.
-Technology Stack
+---
 
+## 🛠️ Installation & Setup
 
-Frontend:
-React: For building the interactive user interface.
-Axios: For API requests.
-Socket.IO Client: For real-time communication.
+### **1️⃣ Clone the Repository**
+```bash
+git clone https://github.com/yourusername/movie-voting.git
+cd movie-voting
+```
 
+### **2️⃣ Backend Setup (Flask)**
+```bash
+cd backend
+python3 -m venv venv
+source venv/bin/activate  # For Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
+```
 
-Backend:
-Python: Backend logic.
-Flask: Lightweight framework to handle API requests and manage business logic.
-Flask-SocketIO: For real-time updates (replacing Node.js Socket.IO).
+### **3️⃣ Frontend Setup (React + Vite)**
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-Database:
-MongoDB: For storing user data, movies, and votes.
+---
 
+## 📊 API Endpoints
 
-Tools & Hosting:
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| **POST** | `/api/auth/login` | User Login (JWT) |
+| **POST** | `/api/auth/signup` | User Signup |
+| **GET** | `/api/movies` | Fetch Movies List |
+| **POST** | `/api/movies/add` | Admin Adds Movies |
+| **POST** | `/api/vote` | User Votes for a Movie |
+| **GET** | `/api/results` | Get Live Voting Results |
 
-Postman: For testing API endpoints.
-Vercel/Netlify: Hosting the frontend.
-Render/Heroku: Hosting the backend.
-MongoDB Atlas: Cloud-hosted database.
+---
 
+## 🚀 Deployment
+### **Backend (Flask)**
+- **Docker:**  
+```bash
+docker-compose up --build
+```
+- **Render/Railway:** Deploy Flask API
 
-Potential Use Cases
+### **Frontend (React)**
+- **Vercel:** `vercel deploy`  
+- **Netlify:** `npm run build && netlify deploy`  
 
-Entertainment Platforms:
-Voting for upcoming movie releases or favorites in award shows.
+---
 
+## 📜 License
+MIT License  
 
-Cinemas & Film Festivals:
-Allowing audiences to vote for movies in real-time.
+---
 
+## 💡 Future Enhancements
+🔹 **Add OAuth Login (Google, GitHub)**  
+🔹 **Enhance Voting Security with Rate Limits**  
+🔹 **Improve UI with Animations & Transitions**  
 
-Social Engagement:
-Community-driven platforms for users to vote and discuss their favorite films.
-
-
-Advantages
-User Engagement: Interactive voting keeps users engaged.
-Scalability: Can handle a large number of users with the chosen tech stack.
-Real-Time Features: Provides a seamless experience with live updates.
-Lightweight and quick to set up.
-Easy integration with MongoDB using pymongo.
-Rich ecosystem for real-time communication (Flask-SocketIO) and security (Flask-JWT).
